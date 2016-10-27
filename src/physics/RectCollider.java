@@ -2,7 +2,7 @@ package physics;
 
 import component.Collider;
 import core.GraphiXObject;
-import math.Vector2;
+import core.Vector2;
 
 public class RectCollider extends Collider implements ICollidable {
 

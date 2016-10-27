@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import component.Rigidbody;
 import core.Renderer;
 import core.Time;
-import math.Vector2;
+import core.Vector2;
 import physics.Physics;
 import primitives.Circle;
 

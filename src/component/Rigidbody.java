@@ -1,6 +1,6 @@
 package component;
 import core.GraphiXObject;
-import math.Vector2;
+import core.Vector2;
 import physics.Physics;
 
 public class Rigidbody extends Component{

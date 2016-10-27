@@ -1,7 +1,7 @@
 package physics;
 
 import component.Collider;
-import math.Vector2;
+import core.Vector2;
 
 public interface ICollidable {
 

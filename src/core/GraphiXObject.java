@@ -5,7 +5,6 @@ import java.util.Map;
 
 import component.Component;
 import component.Transform;
-import math.Vector2;
 
 public class GraphiXObject {
 	public static int objectCnt = 0;

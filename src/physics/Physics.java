@@ -5,7 +5,7 @@ import java.util.List;
 
 import component.Collider;
 import component.Rigidbody;
-import math.Vector2;
+import core.Vector2;
 
 public class Physics{
 	

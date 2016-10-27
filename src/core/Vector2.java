@@ -1,4 +1,4 @@
-package math;
+package core;
 public class Vector2 {
 
 	public double x;
