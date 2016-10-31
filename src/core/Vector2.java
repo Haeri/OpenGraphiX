@@ -36,6 +36,13 @@ public class Vector2 {
 		return this.mul(-1);
 	}
 	
+	public Vector2 leftNormal(){
+		return new Vector2(-y, -x);
+	}
+
+	public Vector2 rightNormal(){
+		return new Vector2(y, -x);
+	}
 	
 	public static Vector2 reflect(Vector2 in, Vector2 surfaceNormal){
 		 // Reflection -2*(V dot N)*N + V
@@ -61,6 +68,11 @@ public class Vector2 {
 	
 	public Vector2 sub(Vector2 other){
 		return new Vector2(x - other.x, y - other.y);
+	}
+	
+	@Override
+	public String toString() {
+		return "Vector2 [x=" + x + ", y=" + y + "]";
 	}
 	
 }

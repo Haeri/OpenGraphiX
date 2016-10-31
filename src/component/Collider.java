@@ -1,10 +1,10 @@
 package component;
 
 import core.GraphiXObject;
-import physics.ICollidable;
+import core.Vector2;
 import physics.Physics;
 
-public abstract class Collider extends Component implements ICollidable{
+public abstract class Collider extends Component{
 
 	public enum ColliderType {CIRCLE, RECT, LINE, POLLY, POINT};
 	public ColliderType type;
@@ -21,4 +21,6 @@ public abstract class Collider extends Component implements ICollidable{
 	public Collider getCollider() {
 		return this;
 	}
+	
+	public abstract Vector2 collide(Collider other);
 }

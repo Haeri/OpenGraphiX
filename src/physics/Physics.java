@@ -44,16 +44,16 @@ public class Physics{
 				
 				if(ret != null){
 					if(rb1 != null)
-						rb1.velocitay = Vector2.reflect(rb1.velocitay, ret); 
+						rb1.velocity = Vector2.reflect(rb1.velocity, ret); 
 					if(rb2 != null)
-						rb2.velocitay = Vector2.reflect(rb2.velocitay, ret.invert());
+						rb2.velocity = Vector2.reflect(rb2.velocity, ret.invert());
 				}
 			}	
 		}
 		
 		// Move the Rigidbodies
 		for (int i = 0; i < bodies.size(); i++){
-			bodies.get(i).transform().position = bodies.get(i).transform().position.add(bodies.get(i).velocitay);
+			bodies.get(i).transform().position = bodies.get(i).transform().position.add(bodies.get(i).velocity);
 		}
 	}
 }

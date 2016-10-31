@@ -4,7 +4,7 @@ import component.Collider;
 import core.GraphiXObject;
 import core.Vector2;
 
-public class LineCollider extends Collider implements ICollidable {
+public class LineCollider extends Collider {
 
 	public Vector2 a;
 	public Vector2 b;

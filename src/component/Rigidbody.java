@@ -5,12 +5,12 @@ import physics.Physics;
 
 public class Rigidbody extends Component{
 
-	public Vector2 velocitay;
+	public Vector2 velocity;
 	public float mass;
 	
 	public Rigidbody(GraphiXObject object){
 		super(object);
-		velocitay = new Vector2(0, 0);
+		velocity = new Vector2(0, 0);
 		Physics.addRigidbody(this);
 	}
 	

@@ -7,14 +7,17 @@ import core.Renderer;
 
 public abstract class ObjectRenderer extends Component{
 	
-	public ObjectRenderer(GraphiXObject object){
+	public int order;
+	
+	public ObjectRenderer(GraphiXObject object, int order){
 		super(object);
-		Renderer.addToDrawCall(this);
+		this.order = order;
+		Renderer.addToDrawCall(this, order);
 	}
 
 	public void destroy(){
 		Renderer.removeFromDrawCall(this);		
 	}
 
-	public abstract void draw(Graphics g, int order);
+	public abstract void draw(Graphics g);
 }

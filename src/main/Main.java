@@ -5,12 +5,19 @@ import java.util.Scanner;
 
 import javax.swing.JFrame;
 
+import component.ObjectRenderer;
 import component.Rigidbody;
 import core.Renderer;
+import core.Text;
 import core.Time;
 import core.Vector2;
+import game.CircleObject;
+import game.GridObject;
+import game.RectangleObject;
+import game.TextObject;
 import physics.Physics;
 import primitives.Circle;
+import primitives.Rect;
 
 public class Main {
 
@@ -36,7 +43,8 @@ public class Main {
 
 	public static final String TITLE = "GraphiX";
 
-	static Circle c1;	
+	static CircleObject c1;	
+	static TextObject txt;
 	
 	public static void main(String[] args) {
 		frame = new JFrame(TITLE);
@@ -95,23 +103,44 @@ public class Main {
 
 	public void init() {
 
-		for (int i = 0; i < 50; i++) {
-			Circle cX = new Circle(10, new Color((int) (Math.random() * 0x1000000)));
-			cX.transform.position = new Vector2(Math.random() * X_WINDOW_SIZE, Math.random() * Y_WINDOW_SIZE);
-			Rigidbody rb = cX.getComponent(Rigidbody.class);
-			rb.velocitay = new Vector2(Math.random() - 0.5, Math.random() - 0.5).normalize();
-		}
+//		for (int i = 0; i < 2; i++) {
+//			CircleObject cX = new CircleObject(10, new Color((int) (Math.random() * 0x1000000)));
+//			cX.transform.position = new Vector2(Math.random() * X_WINDOW_SIZE, Math.random() * Y_WINDOW_SIZE);
+//			Rigidbody rb = cX.getComponent(Rigidbody.class);
+//			rb.velocity = new Vector2(Math.random() - 0.5, Math.random() - 0.5).normalize();
+//		}
 
-		c1 = new Circle(30, Color.RED);
-		c1.transform.position = new Vector2(X_WINDOW_SIZE / 2 - 200, Y_WINDOW_SIZE / 2 - 30);
+		c1 = new CircleObject(30, Color.RED);
+		c1.transform.position = new Vector2(X_WINDOW_SIZE / 2, Y_WINDOW_SIZE / 2 + 140);
 		Rigidbody rb1 = c1.getComponent(Rigidbody.class);
-		rb1.velocitay = new Vector2(1, 0);
+		rb1.velocity = new Vector2(1, -1);
 
-		// Circle c2 = new Circle(30, Color.GREEN);
-		// c2.transform.position = new Vector2(X_WINDOW_SIZE / 2 + 200,
-		// Y_WINDOW_SIZE / 2);
-		// c2.rigidbody.velocitay = new Vector2(-1, 0);
-		//
+		 RectangleObject qtop = new RectangleObject(900, 20.0, Color.WHITE);
+		 qtop.transform.position = new Vector2(X_WINDOW_SIZE / 2, 10);
+		 
+		 RectangleObject qbot = new RectangleObject(900, 20.0, Color.WHITE);
+		 qbot.transform.position = new Vector2(X_WINDOW_SIZE / 2, Y_WINDOW_SIZE - 40);
+		 
+		 RectangleObject qleft = new RectangleObject(20, 900.0, Color.WHITE);
+		 qleft.transform.position = new Vector2(10, Y_WINDOW_SIZE /2);
+		 
+		 RectangleObject qright = new RectangleObject(20, 900.0, Color.WHITE);
+		 qright.transform.position = new Vector2(X_WINDOW_SIZE -20, Y_WINDOW_SIZE /2);
+		 
+		 //GridObject gr = new GridObject(10, 10, Color.BLUE);
+		 
+		 
+		 txt = new TextObject("WOAH!", Color.RED);
+		 txt.transform.position = new Vector2(10, 10);
+		 
+		
+//		 CircleObject c2 = new CircleObject(10, Color.GREEN);
+//		 c2.transform.position = new Vector2(X_WINDOW_SIZE / 2 + 200,Y_WINDOW_SIZE / 2);
+//		 Rigidbody rb2 = c2.getComponent(Rigidbody.class);
+//		 rb2.velocity = new Vector2(-1, 0);
+		
+		 
+		 //
 		// Circle c3 = new Circle(30, Color.BLUE);
 		// c3.transform.position = new Vector2(X_WINDOW_SIZE / 2 - 130,
 		// Y_WINDOW_SIZE / 2 -130);
@@ -187,6 +216,10 @@ public class Main {
 		// Math.random() - 0.5).normalize();
 		// }
 		// }
+		
+		//FIXME
+		txt.text = new Text("Delta: " + Time.deltaTime());
+		txt.color = new Color((int) (Math.random() * 0x1000000));
 	}
 
 	public void render() {

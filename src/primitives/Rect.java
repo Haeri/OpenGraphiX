@@ -1,29 +1,23 @@
 package primitives;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import core.Vector2;
 
-import component.ObjectRenderer;
-import component.Rigidbody;
-import core.GraphiXObject;
-
-public class Rect extends GraphiXObject{
+public class Rect{
+	public Vector2 topLeft;
+	public Vector2 topRight;
+	public Vector2 bottomLeft;
+	public Vector2 bottomRight;
+	public Vector2 position;
 	public double width;
 	public double height;
-	public Color color;
 
-	public Rect(double width, double height, Color color){
-		super();		
-		addComponent(new Rigidbody(this));
-		addComponent(new ObjectRenderer(this) {
-			public void draw(Graphics g, int order) {
-				g.setColor(color);
-				g.fillRect((int)(transform.position.x - width/2), (int)(transform.position.y - height/2), (int)(width * transform.scale.x), (int)(height * transform.scale.y));
-			}		
-		});
-		
+	public Rect(Vector2 position, double width, double height){		
 		this.width = width;
 		this.height = height;
-		this.color = color;
+		
+		topLeft = new Vector2(position.x - width/2, position.y - height/2);
+		topRight = new Vector2(topLeft.x + width, topLeft.y);
+		bottomLeft = new Vector2(topLeft.x, topLeft.y + height);
+		bottomRight = new Vector2(topLeft.x + width, topLeft.y + height);
 	}
 }
