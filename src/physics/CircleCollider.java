@@ -1,21 +1,16 @@
 package physics;
 
-import java.awt.Color;
-
-import javax.xml.soap.Text;
-
 import component.Collider;
 import core.GraphiXObject;
 import core.Vector2;
-import game.CircleObject;
-import game.GizmoCitcle;
 
 public class CircleCollider extends Collider{
 
 	public double radius;
-	
-	public CircleCollider(double radius, GraphiXObject object){
+		
+	public CircleCollider(double radius, boolean isTrigger, GraphiXObject object){
 		super(object);
+		super.isTrigger = isTrigger;
 		
 		this.radius = radius;
 		type = ColliderType.CIRCLE;
@@ -45,41 +40,24 @@ public class CircleCollider extends Collider{
 				break;
 			case RECT:
 				RectCollider rectCol = (RectCollider)other;
-				
-////				
-//				GizmoCitcle gl = new GizmoCitcle(3, Color.BLUE);
-//				gl.transform.position = rectCol.topLeft();
-//				
-//				GizmoCitcle g2 = new GizmoCitcle(3, Color.BLUE);
-//				g2.transform.position = rectCol.topRight();
-//				
-//				GizmoCitcle g3 = new GizmoCitcle(3, Color.BLUE);
-//				g3.transform.position = rectCol.bottomLeft();
-//				
-//				GizmoCitcle g4 = new GizmoCitcle(3, Color.BLUE);
-//				g4.transform.position = rectCol.bottomRight();
-				
-				Vector2 test = new Vector2(rectCol.transform().position.x, rectCol.transform().position.y);
-//				Vector2 norm = Vector2.ONE;
+				Vector2 test = rectCol.transform().position.clone();
 				
 				boolean isInsideX = false;
 				boolean isInsideY = false;
 				
-				if(object.transform.position.x <= rectCol.topLeft().x-getRadius()) {
-					test.x = rectCol.topLeft().x;
-//					test.y = object.transform.position.y;
-				}else if(object.transform.position.x >= rectCol.topRight().x+getRadius()) {
-					test.x = rectCol.topRight().x;
+				if(object.transform.position.x <= rectCol.toWorld(rectCol.topLeft).x-getRadius()) {
+					test.x = rectCol.toWorld(rectCol.topLeft).x;
+				}else if(object.transform.position.x >= rectCol.toWorld(rectCol.topRight).x+getRadius()) {
+					test.x = rectCol.toWorld(rectCol.topRight).x;
 				}else{
 					test.x = object.transform.position.x;
 					isInsideX = true;
 				}
 				
-				if(object.transform.position.y <= rectCol.topLeft().y-getRadius()){
-					test.y = rectCol.topLeft().y;
-//					test.x = object.transform.position.x;
-				}else if(object.transform.position.y >= rectCol.bottomLeft().y+getRadius()) {
-					test.y = rectCol.bottomLeft().y;
+				if(object.transform.position.y <= rectCol.toWorld(rectCol.topLeft).y-getRadius()){
+					test.y = rectCol.toWorld(rectCol.topLeft).y;
+				}else if(object.transform.position.y >= rectCol.toWorld(rectCol.bottomLeft).y+getRadius()) {
+					test.y = rectCol.toWorld(rectCol.bottomLeft).y;
 				}else{
 					test.y = object.transform.position.y;
 					isInsideY = true;
@@ -87,14 +65,17 @@ public class CircleCollider extends Collider{
 				
 				double cdist = test.sub(object.transform.position).squareMagnitude();
 				
-//				GizmoCitcle cl = new GizmoCitcle(3, Color.RED);
-//				cl.transform.position = test;
-							
-				
-				if(getRadius() * getRadius() >= cdist || (isInsideX && isInsideY)){
+//				if(isInsideX && isInsideY){
+//					System.out.println("INSIDE");
+////					test = rectCol.transform().position.clone();
+//					ret = object.transform.position.sub(test).normalize();
+//				}else 
+				if(getRadius() * getRadius() >= cdist && (isInsideX && isInsideY)){
+					System.out.println(object.transform.position + " " + test);
 					ret = object.transform.position.sub(test).normalize();
-					System.out.println("Yes");
+					System.out.println("CONTACT " + ret);
 				}
+				
 				break;
 			default:
 				ret = null;

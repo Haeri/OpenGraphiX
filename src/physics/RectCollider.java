@@ -10,38 +10,47 @@ public class RectCollider extends Collider {
 	public Vector2 topRight;
 	public Vector2 bottomLeft;
 	public Vector2 bottomRight;
+	public Vector2 pivot;
 	public double width;
 	public double height;
 
 	public RectCollider(double width, double height, GraphiXObject object) {
+		this(Vector2.ZERO, width, height, object);
+	}
+		
+	public RectCollider(Vector2 pivot, double width, double height, GraphiXObject object) {
 		super(object);
 		this.width = width;
 		this.height = height;
+		this.pivot = pivot;
+		
+		this.topLeft = new Vector2(-width/2, -height/2);
+		this.topRight = new Vector2(width/2, -height/2);
+		this.bottomLeft = new Vector2(-width/2, height/2);
+		this.bottomRight = new Vector2(width/2, height/2);			
+		
 		type = ColliderType.RECT;
-		
-		topLeft = new Vector2(transform().position.x - width/2, transform().position.y - height/2);
-		topRight = new Vector2(topLeft.x + width, topLeft.y);
-		bottomLeft = new Vector2(topLeft.x, topLeft.y + height);
-		bottomRight = new Vector2(topLeft.x + width, topLeft.y + height);	
-		
-		System.out.println(topLeft + " " + topRight + " " + bottomLeft + " " + bottomRight);
 	}
 	
-	public Vector2 topLeft(){
-		return new Vector2(transform().position.x - width/2, transform().position.y - height/2);
+	public Vector2 toWorld(Vector2 vec){
+		return new Vector2(transform().position.x + vec.x, transform().position.y + vec.y);
 	}
-	
-	public Vector2 topRight(){
-		return new Vector2(topLeft().x + width, topLeft().y);
-	}
-	
-	public Vector2 bottomLeft(){
-		return new Vector2(topLeft().x, topLeft().y + height);
-	}
-	
-	public Vector2 bottomRight(){
-		return new Vector2(topLeft().x + width, topLeft().y + height);
-	}
+//	
+//	public Vector2 topLeft(){
+//		return new Vector2(transform().position.x - width/2, transform().position.y - height/2);
+//	}
+//	
+//	public Vector2 topRight(){
+//		return new Vector2(topLeft().x + width, topLeft().y);
+//	}
+//	
+//	public Vector2 bottomLeft(){
+//		return new Vector2(topLeft().x, topLeft().y + height);
+//	}
+//	
+//	public Vector2 bottomRight(){
+//		return new Vector2(topLeft().x + width, topLeft().y + height);
+//	}
 	
 
 
@@ -50,38 +59,38 @@ public class RectCollider extends Collider {
 
 		switch (other.type) {
 		case CIRCLE:
-			CircleCollider circleCol = (CircleCollider)other;
-		
-		Vector2 test = new Vector2(transform().position.x, transform().position.y);
-		
-		boolean isInsideX = false;
-		boolean isInsideY = false;
-		
-		if(object.transform.position.x <= topLeft().x-circleCol.getRadius()) {
-			test.x = topLeft().x;
-		}else if(object.transform.position.x >= topRight().x+circleCol.getRadius()) {
-			test.x = topRight().x;
-		}else{
-			test.x = object.transform.position.x;
-			isInsideX = true;
-		}
-		
-		if(object.transform.position.y <= topLeft().y-circleCol.getRadius()){
-			test.y = topLeft().y;
-		}else if(object.transform.position.y >= bottomLeft().y+circleCol.getRadius()) {
-			test.y = bottomLeft().y;
-		}else{
-			test.y = object.transform.position.y;
-			isInsideY = true;
-		}
-		
-		double cdist = test.sub(object.transform.position).squareMagnitude();
-		
-		if(circleCol.getRadius() * circleCol.getRadius() >= cdist || (isInsideX && isInsideY)){
-			ret = object.transform.position.sub(test).normalize();
-			System.out.println("Yes");
-		}
-			
+	//		CircleCollider circleCol = (CircleCollider)other;
+	//		
+	//		Vector2 test = new Vector2(transform().position.x, transform().position.y);
+	//		
+	//		boolean isInsideX = false;
+	//		boolean isInsideY = false;
+	//		
+	//		if(object.transform.position.x <= toWorld(topLeft).x-circleCol.getRadius()) {
+	//			test.x = toWorld(topLeft).x;
+	//		}else if(object.transform.position.x >= toWorld(topRight).x+circleCol.getRadius()) {
+	//			test.x = toWorld(topRight).x;
+	//		}else{
+	//			test.x = object.transform.position.x;
+	//			isInsideX = true;
+	//		}
+	//		
+	//		if(object.transform.position.y <= toWorld(topLeft).y-circleCol.getRadius()){
+	//			test.y = toWorld(topLeft).y;
+	//		}else if(object.transform.position.y >= toWorld(bottomLeft).y+circleCol.getRadius()) {
+	//			test.y = toWorld(bottomLeft).y;
+	//		}else{
+	//			test.y = object.transform.position.y;
+	//			isInsideY = true;
+	//		}
+	//		
+	//		double cdist = test.sub(object.transform.position).squareMagnitude();
+	//		
+	//		if(circleCol.getRadius() * circleCol.getRadius() >= cdist || (isInsideX && isInsideY)){
+	//			ret = object.transform.position.sub(test).normalize();
+	//			System.out.println("Yes");
+	//		}
+	//			
 			
 			break;
 		case LINE:

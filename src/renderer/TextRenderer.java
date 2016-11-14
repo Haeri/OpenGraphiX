@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import component.ObjectRenderer;
 import core.GraphiXObject;
 import core.Text;
-import game.TextObject;
+import primitives.GO_Text;
 
 public class TextRenderer extends ObjectRenderer{
 
@@ -21,7 +21,7 @@ public class TextRenderer extends ObjectRenderer{
 
 	@Override
 	public void draw(Graphics g) {
-		g.setColor(((TextObject)object).color);
+		g.setColor(((GO_Text)object).color);
 		g.drawString(text.text, (int)object.transform.position.x, (int)object.transform.position.y);
 	}
 

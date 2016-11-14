@@ -3,13 +3,13 @@ package renderer;
 import java.awt.Graphics;
 
 import component.ObjectRenderer;
-import game.RectangleObject;
+import primitives.GO_Rect;
 
 public class RectRenderer extends ObjectRenderer {
 
-	private RectangleObject rect;
+	private GO_Rect rect;
 	
-	public RectRenderer(RectangleObject rect, int order) {
+	public RectRenderer(GO_Rect rect, int order) {
 		super(rect, order);
 		this.rect = rect;
 	}

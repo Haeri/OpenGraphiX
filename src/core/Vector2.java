@@ -27,6 +27,7 @@ public class Vector2 {
 	
 	public Vector2 normalize() {
 		double tmp = this.magnitude();
+		if(tmp == 0) return Vector2.ZERO;
 		x /= tmp;
 		y /= tmp;
 		return this;
@@ -46,7 +47,10 @@ public class Vector2 {
 	
 	public static Vector2 reflect(Vector2 in, Vector2 surfaceNormal){
 		 // Reflection -2*(V dot N)*N + V
-		return surfaceNormal.mul(-2 * (Vector2.dot(in, surfaceNormal))).add(in);
+		
+		Vector2 ret = surfaceNormal.mul(-2 * (Vector2.dot(in, surfaceNormal))).add(in);
+//		System.out.println(ret);
+		return ret;
 	}
 
 	
@@ -73,6 +77,10 @@ public class Vector2 {
 	@Override
 	public String toString() {
 		return "Vector2 [x=" + x + ", y=" + y + "]";
+	}
+	
+	public Vector2 clone(){
+		return new Vector2(x, y);
 	}
 	
 }

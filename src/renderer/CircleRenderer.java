@@ -5,7 +5,6 @@ import java.awt.Graphics;
 
 import component.ObjectRenderer;
 import core.GraphiXObject;
-import game.CircleObject;
 
 public class CircleRenderer extends ObjectRenderer{
 
@@ -17,7 +16,6 @@ public class CircleRenderer extends ObjectRenderer{
 		this.radius = radius;
 		this.color = color;
 	}
-	
 	
 	@Override
 	public void draw(Graphics g) {

@@ -1,23 +1,23 @@
-package game;
+package primitives;
+
 import java.awt.Color;
 import java.awt.Graphics;
 
 import component.ObjectRenderer;
-import component.Rigidbody;
 import core.GraphiXObject;
-import core.Vector2;
 import physics.RectCollider;
-import renderer.RectRenderer;
 
-
-public class RectangleObject extends GraphiXObject{
+public class GO_Rect extends GraphiXObject{
 	public double width;
 	public double height;
 	
 	public Color color;
 
-	public RectangleObject(double width, double height, Color color){
+	public GO_Rect(double width, double height, Color color){
 		super();
+		this.width = width;
+		this.height = height;
+		this.color = color;
 		
 		//addComponent(new Rigidbody(this));		
 		addComponent(new RectCollider(width, height, this));
@@ -26,10 +26,6 @@ public class RectangleObject extends GraphiXObject{
 				g.setColor(color);
 				g.fillRect((int)(transform.position.x - width/2), (int)(transform.position.y - height/2), (int)(width * transform.scale.x), (int)(height * transform.scale.y));
 			}	
-		});
-		
-		this.width = width;
-		this.height = height;
-		this.color = color;
+		});	
 	}
 }
