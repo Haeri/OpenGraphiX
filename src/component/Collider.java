@@ -1,13 +1,20 @@
 package component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import core.GraphiXObject;
 import core.Vector2;
+import physics.CollisionListener;
 import physics.Physics;
 
 public abstract class Collider extends Component{
 
 	public enum ColliderType {CIRCLE, RECT, LINE, POLLY, POINT};
 	public ColliderType type;
+	public boolean isTrigger;
+
+	private List<CollisionListener> listeners = new ArrayList<CollisionListener>();
 	
 	public Collider(GraphiXObject object) {
 		super(object);
@@ -23,4 +30,14 @@ public abstract class Collider extends Component{
 	}
 	
 	public abstract Vector2 collide(Collider other);
+	
+
+    public void addListener(CollisionListener toAdd) {
+        listeners.add(toAdd);
+    }
+
+    public void fire(Collider other) {
+        for (CollisionListener hl : listeners)
+            hl.onCillisionEnter(other);
+    }
 }
