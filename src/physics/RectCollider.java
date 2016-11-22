@@ -1,8 +1,14 @@
 package physics;
 
+import java.awt.Color;
+
+import com.sun.prism.Graphics;
+
 import component.Collider;
 import core.GraphiXObject;
 import core.Vector2;
+import renderer.Gizmo;
+import javafx.scene.transform.Transform;
 
 public class RectCollider extends Collider {
 
@@ -32,8 +38,12 @@ public class RectCollider extends Collider {
 		type = ColliderType.RECT;
 	}
 	
+	public void drawGizmo(){
+		Gizmo.drawRect(transform().position, width * transform().scale.x, height * transform().scale.y, Color.GREEN);
+	}
+	
 	public Vector2 toWorld(Vector2 vec){
-		return new Vector2(transform().position.x + vec.x, transform().position.y + vec.y);
+		return new Vector2(transform().position.x + (vec.x * transform().scale.x), transform().position.y + (vec.y * transform().scale.y));
 	}
 //	
 //	public Vector2 topLeft(){
@@ -59,6 +69,7 @@ public class RectCollider extends Collider {
 
 		switch (other.type) {
 		case CIRCLE:
+			System.out.println("HELOOOO");
 	//		CircleCollider circleCol = (CircleCollider)other;
 	//		
 	//		Vector2 test = new Vector2(transform().position.x, transform().position.y);

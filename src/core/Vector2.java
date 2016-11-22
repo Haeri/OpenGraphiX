@@ -25,6 +25,14 @@ public class Vector2 {
 		return Math.sqrt(x * x + y * y);
 	}
 	
+	public static double distance(Vector2 a, Vector2 b){
+		return a.sub(b).magnitude();
+	}
+	
+	public static double sqareDistance(Vector2 a, Vector2 b){
+		return a.sub(b).squareMagnitude();
+	}
+	
 	public Vector2 normalize() {
 		double tmp = this.magnitude();
 		if(tmp == 0) return Vector2.ZERO;
@@ -49,7 +57,6 @@ public class Vector2 {
 		 // Reflection -2*(V dot N)*N + V
 		
 		Vector2 ret = surfaceNormal.mul(-2 * (Vector2.dot(in, surfaceNormal))).add(in);
-//		System.out.println(ret);
 		return ret;
 	}
 
@@ -60,6 +67,10 @@ public class Vector2 {
 	
 	public Vector2 mul(double m){
 		return new Vector2(x * m, y * m);
+	}
+	
+	public Vector2 mul(Vector2 other){
+		return new Vector2(other.x * x, other.y * y);
 	}
 	
 	public Vector2 div(double m){

@@ -24,5 +24,5 @@ public abstract class Component {
 		return (T) object.getComponent(c);
 	}
 
-	public void destroy(){}
+	public void _destroy(){}
 }

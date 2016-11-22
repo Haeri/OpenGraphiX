@@ -21,7 +21,7 @@ public abstract class Collider extends Component{
 		Physics.addCollider(this);
 	}
 
-	public void destroy(){
+	public void _destroy(){
 		Physics.removeFromCollider(this);
 	}
 	
@@ -30,7 +30,8 @@ public abstract class Collider extends Component{
 	}
 	
 	public abstract Vector2 collide(Collider other);
-	
+
+	public abstract void drawGizmo();
 
     public void addListener(CollisionListener toAdd) {
         listeners.add(toAdd);
@@ -38,6 +39,6 @@ public abstract class Collider extends Component{
 
     public void fire(Collider other) {
         for (CollisionListener hl : listeners)
-            hl.onCillisionEnter(other);
+            hl.onCollisionEnter(other);
     }
 }

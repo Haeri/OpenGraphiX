@@ -4,7 +4,7 @@ import component.Collider;
 
 public interface CollisionListener {
 
-	public void onCillisionEnter(Collider collider);
-	public void onCillisionExit(CollisionEvent e);
-	public void onCillisionStay(CollisionEvent e);
+	public void onCollisionEnter(Collider collider);
+	public void onCollisionExit(CollisionEvent e);
+	public void onCollisionStay(CollisionEvent e);
 }

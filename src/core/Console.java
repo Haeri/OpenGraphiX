@@ -2,6 +2,8 @@ package core;
 
 import java.util.Scanner;
 
+import renderer.Gizmo;
+
 public class Console extends Thread{
 
 	private Scanner inputReader;
@@ -20,6 +22,8 @@ public class Console extends Thread{
 					Core.running = true;
 				} else if (input.equalsIgnoreCase("Q")) {
 					System.exit(0);
+				} else if (input.equalsIgnoreCase("gizmo")) {
+					Gizmo.isEnable = !Gizmo.isEnable; 
 				}
 			}
 		}

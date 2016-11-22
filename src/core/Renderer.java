@@ -18,19 +18,20 @@ import renderer.Gizmo;
 public class Renderer extends Canvas {
 	
 	public Color clearFlag;
-	public static int WIDTH = 1200;
-	public static int HEIGHT = 900;
+	public static int WIDTH;
+	public static int HEIGHT;
 	
 	BufferStrategy bs;
 	private static TreeMap<Integer, List<ObjectRenderer>> drawCalls;
-	private static List<Gizmo> gizmos;
 	
 	private static final long serialVersionUID = 1L;
 
-	public Renderer() {
+	public Renderer(int width, int height) {
+		WIDTH = width;
+		HEIGHT = height;
 		drawCalls = new TreeMap<Integer, List<ObjectRenderer>>();
-		gizmos = new ArrayList<Gizmo>();
 		
+		Gizmo.init();
 		setSize(WIDTH, HEIGHT);
 	}
 
@@ -48,14 +49,6 @@ public class Renderer extends Canvas {
 		drawCalls.get(renderer.order).remove(renderer);
 		if (drawCalls.get(renderer.order).size() == 0)
 			drawCalls.remove(renderer.order);
-	}
-
-	public static void addGizmo(Gizmo g){
-		gizmos.add(g);
-	}
-	
-	public static void removeGizmo(Gizmo g){
-		gizmos.remove(g);
 	}
 
 	public static int getDrawCalls() {
@@ -86,8 +79,10 @@ public class Renderer extends Canvas {
 			}
 		}
 		
-		g.drawImage(Gizmo.getFrame(), WIDTH, HEIGHT, null);
-		Gizmo.init();
+		if(Gizmo.isEnable){
+			g.drawImage(Gizmo.getFrame(), 0, 0, null);
+			Gizmo.clear();		
+		}
 		
 		g.dispose();
 		bs.show();

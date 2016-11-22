@@ -1,8 +1,13 @@
 package physics;
 
+import java.awt.Color;
+
+import com.sun.prism.Graphics;
+
 import component.Collider;
 import core.GraphiXObject;
 import core.Vector2;
+import renderer.Gizmo;
 
 public class LineCollider extends Collider {
 
@@ -22,6 +27,10 @@ public class LineCollider extends Collider {
 	
 	public Vector2 getB(){
 		return b;
+	}
+	
+	public void drawGizmo(){
+		Gizmo.drawLine(a, b, Color.GREEN);
 	}
 	
 	public Vector2 collide(Collider other){

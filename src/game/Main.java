@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 import core.Core;
 import game.scene.Scene_1;
+import game.scene.Scene_2;
 
 public class Main {
 	public static void main(String[] args) {

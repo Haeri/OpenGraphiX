@@ -32,11 +32,16 @@ public class Core {
 	public GO_ParticleSystem mouse;
 //	public CircleObject mouse;
 	
-	public Core(Scene scene) {
-		renderer = new Renderer();
-		renderer.clearFlag = Color.BLACK;
+	public Core(Scene scene){
+		this(scene, 1000, 600);
+	}
+	
+	public Core(Scene scene, int width, int height) {
+		renderer = new Renderer(width, height);
+		renderer.clearFlag = new Color(30, 30, 30);
 
 		physics = new Physics();
+		Physics.setGravity(Physics.SPACE);
 
 		time = new Time();
 
@@ -56,9 +61,8 @@ public class Core {
 		physicsString.transform.position = new Vector2(10, 45);
 
 //		mouse = new GizmoCircle(3, Color.GREEN);
-//		mouse = new ParticleSystemObject(1);
+//		mouse = new GO_ParticleSystem(10);
 //		mouse = new CircleObject(20, Color.GREEN);
-		
 		
 		scene.Start();
 	}
@@ -140,3 +144,43 @@ public class Core {
 	}
 
 }
+
+
+
+/*
+
+double t = 0.0;
+double dt = 0.01;
+
+double currentTime = hires_time_in_seconds();
+double accumulator = 0.0;
+
+State previous;
+State current;
+
+while ( !quit )
+{
+    double newTime = time();
+    double frameTime = newTime - currentTime;
+    if ( frameTime > 0.25 )
+        frameTime = 0.25;
+    currentTime = newTime;
+
+    accumulator += frameTime;
+
+    while ( accumulator >= dt )
+    {
+        previousState = currentState;
+        integrate( currentState, t, dt );
+        t += dt;
+        accumulator -= dt;
+    }
+
+    const double alpha = accumulator / dt;
+
+    State state = currentState * alpha + 
+        previousState * ( 1.0 - alpha );
+
+    render( state );
+}
+*/

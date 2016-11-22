@@ -15,7 +15,7 @@ public abstract class ObjectRenderer extends Component{
 		Renderer.addToDrawCall(this, order);
 	}
 
-	public void destroy(){
+	public void _destroy(){
 		Renderer.removeFromDrawCall(this);		
 	}
 

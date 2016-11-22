@@ -20,11 +20,15 @@ public abstract class GraphiXScript extends Component {
 	public void Update(){
 		notImplemented = true;
 	}
-	
+
 	/**
 	 * Destroys the component
 	 */
-	public void destroy(){
+	public void Destroy(){}
+	
+
+	public final void _destroy(){
+		Destroy();
 		if(!notImplemented)
 			Core.removeFromUpdate(this);
 	}

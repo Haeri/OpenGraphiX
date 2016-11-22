@@ -6,12 +6,11 @@ import physics.Physics;
 
 public class Rigidbody extends Component{
 
-	public Vector2 velocity;
-	public float mass;
+	public Vector2 velocity = Vector2.ZERO;
+	public double mass = 1;
 	
 	public Rigidbody(GraphiXObject object){
 		super(object);
-		velocity = new Vector2(0, 0);
 		Physics.addRigidbody(this);
 	}
 	
@@ -21,10 +20,11 @@ public class Rigidbody extends Component{
 	 * @param force, THe force to be applied
 	 */
 	public void addForce(Vector2 force){
-		velocity = velocity.add(force);
+		Vector2 acceleration = force.div(mass);
+		velocity = velocity.add(acceleration);
 	}
 	
-	public void destroy(){
+	public void _destroy(){
 		Physics.removeFromRigidbody(this);
 	}
 }
