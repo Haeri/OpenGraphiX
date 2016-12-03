@@ -5,9 +5,10 @@ import java.awt.Color;
 import com.sun.prism.Graphics;
 
 import component.Collider;
+import core.Bounds;
 import core.GraphiXObject;
 import core.Vector2;
-import renderer.Gizmo;
+import render.Gizmo;
 
 public class LineCollider extends Collider {
 
@@ -67,5 +68,11 @@ public class LineCollider extends Collider {
 		}
 		
 		return ret;
+	}
+
+	@Override
+	public Bounds getBounds() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

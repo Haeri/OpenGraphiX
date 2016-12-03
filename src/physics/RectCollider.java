@@ -5,10 +5,11 @@ import java.awt.Color;
 import com.sun.prism.Graphics;
 
 import component.Collider;
+import core.Bounds;
 import core.GraphiXObject;
 import core.Vector2;
-import renderer.Gizmo;
 import javafx.scene.transform.Transform;
+import render.Gizmo;
 
 public class RectCollider extends Collider {
 
@@ -39,7 +40,7 @@ public class RectCollider extends Collider {
 	}
 	
 	public void drawGizmo(){
-		Gizmo.drawRect(transform().position, width * transform().scale.x, height * transform().scale.y, Color.GREEN);
+	//	Gizmo.drawRect(transform().position, width * transform().scale.x, height * transform().scale.y, Color.GREEN);
 	}
 	
 	public Vector2 toWorld(Vector2 vec){
@@ -69,7 +70,6 @@ public class RectCollider extends Collider {
 
 		switch (other.type) {
 		case CIRCLE:
-			System.out.println("HELOOOO");
 	//		CircleCollider circleCol = (CircleCollider)other;
 	//		
 	//		Vector2 test = new Vector2(transform().position.x, transform().position.y);
@@ -121,5 +121,10 @@ public class RectCollider extends Collider {
 		}
 
 		return ret;
+	}
+
+	@Override
+	public Bounds getBounds() {
+		return new Bounds(toWorld(topLeft), toWorld(bottomRight));
 	}
 }

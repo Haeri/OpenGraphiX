@@ -5,9 +5,10 @@ import java.awt.Color;
 import com.sun.prism.Graphics;
 
 import component.Collider;
+import core.Bounds;
 import core.GraphiXObject;
 import core.Vector2;
-import renderer.Gizmo;
+import render.Gizmo;
 
 public class CircleCollider extends Collider{
 
@@ -27,6 +28,10 @@ public class CircleCollider extends Collider{
 	
 	public void drawGizmo(){
 		Gizmo.drawCircle(transform().position, getRadius(), Color.GREEN);
+	}
+	
+	public Bounds getBounds(){
+		return new Bounds(new Vector2(-getRadius()+ transform().position.x, -getRadius()+ transform().position.y), new Vector2(getRadius()+ transform().position.x, getRadius()+ transform().position.y));
 	}
 	
 	public Vector2 collide(Collider other){

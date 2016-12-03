@@ -3,6 +3,7 @@ package component;
 import java.util.ArrayList;
 import java.util.List;
 
+import core.Bounds;
 import core.GraphiXObject;
 import core.Vector2;
 import physics.CollisionListener;
@@ -13,6 +14,7 @@ public abstract class Collider extends Component{
 	public enum ColliderType {CIRCLE, RECT, LINE, POLLY, POINT};
 	public ColliderType type;
 	public boolean isTrigger;
+	public boolean processed = false;
 
 	private List<CollisionListener> listeners = new ArrayList<CollisionListener>();
 	
@@ -28,6 +30,8 @@ public abstract class Collider extends Component{
 	public Collider getCollider() {
 		return this;
 	}
+	
+	public abstract Bounds getBounds();
 	
 	public abstract Vector2 collide(Collider other);
 

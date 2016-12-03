@@ -10,7 +10,9 @@ import component.Rigidbody;
 import core.GraphiXObject;
 import core.Time;
 import physics.CircleCollider;
+import primitives.Camera;
 import game.scripts.Cell;
+import game.scripts.Circular;
 import game.scripts.Rotator;
 
 public class CellObject extends GraphiXObject{
@@ -28,12 +30,9 @@ public class CellObject extends GraphiXObject{
 		addComponent(new Cell(radius, this));
 		addComponent(new ObjectRenderer(this, 1) {			
 			@Override
-			public void draw(Graphics g) {
-
-				Graphics2D g2d = (Graphics2D) g.create();
-
+			public void draw(Graphics2D g2d) {
 				AffineTransform tx1 = new AffineTransform();
-				tx1.translate(transform.position.x, transform.position.y);
+				tx1.translate(transform.position.x - Camera.getMVP().x, transform.position.y - Camera.getMVP().y);
 				tx1.rotate(transform.rotation);
 				g2d.setTransform(tx1);
 
@@ -45,9 +44,8 @@ public class CellObject extends GraphiXObject{
 				
 				g2d.setColor(Color.WHITE);
 				g2d.drawString((int)((Cell)(CellObject.this.getComponent(Cell.class))).mass + "", -5, 5);
-				
-				g2d.dispose();
 			}
 		});
+		addComponent(new Circular(this));
 	}
 }

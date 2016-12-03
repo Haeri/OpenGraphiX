@@ -6,10 +6,14 @@ import java.util.List;
 
 import component.GraphiXScript;
 import physics.Physics;
+import primitives.Camera;
+import primitives.GO_Circle;
 import primitives.GO_ParticleSystem;
 import primitives.GO_Text;
+import primitives.UI_Text;
+import render.Renderer;
 
-public class Core {
+public class Core extends Thread{
 
 	public static boolean running;
 
@@ -19,24 +23,27 @@ public class Core {
 	public Renderer renderer;
 	public Physics physics;
 	public Time time;
+	public InputManager inputManager;
 
 	public static final String TITLE = "GraphiX";
 
 	private static List<GraphiXScript> scripts;
 
-	public GO_Text deltaString;
-	public GO_Text drawCallString;
-	public GO_Text physicsString;
+	public UI_Text deltaString;
+	public UI_Text drawCallString;
+	public UI_Text physicsString;
 
 //	public GizmoCircle mouse;
-	public GO_ParticleSystem mouse;
-//	public CircleObject mouse;
+//	public GO_ParticleSystem mouse;
+//	public GO_Circle mouse;
+	public Camera mouse;
 	
 	public Core(Scene scene){
 		this(scene, 1000, 600);
 	}
 	
 	public Core(Scene scene, int width, int height) {
+//		this.setDaemon(true);
 		renderer = new Renderer(width, height);
 		renderer.clearFlag = new Color(30, 30, 30);
 
@@ -44,6 +51,8 @@ public class Core {
 		Physics.setGravity(Physics.SPACE);
 
 		time = new Time();
+		
+		inputManager = new InputManager();
 
 		new Console().start();
 		
@@ -51,18 +60,19 @@ public class Core {
 
 		running = true;
 
-		deltaString = new GO_Text("Delta!", Color.WHITE);
+		deltaString = new UI_Text("Delta!", Color.WHITE);
 		deltaString.transform.position = new Vector2(10, 15);
 
-		drawCallString = new GO_Text("DrawCalls", Color.WHITE);
+		drawCallString = new UI_Text("DrawCalls", Color.WHITE);
 		drawCallString.transform.position = new Vector2(10, 30);
 		
-		physicsString = new GO_Text("Physics", Color.WHITE);
+		physicsString = new UI_Text("Physics", Color.WHITE);
 		physicsString.transform.position = new Vector2(10, 45);
 
 //		mouse = new GizmoCircle(3, Color.GREEN);
 //		mouse = new GO_ParticleSystem(10);
-//		mouse = new CircleObject(20, Color.GREEN);
+//		mouse = new GO_Circle(20, Color.GREEN);
+//		mouse = new Camera();
 		
 		scene.Start();
 	}
@@ -83,38 +93,41 @@ public class Core {
 		long lastLoopTime = System.nanoTime();
 		double OPTIMAL_TIME = 1000000000.0 / TARGET_FPS;
 
-		while (running) {
-			long now = System.nanoTime();
-			long updateLength = now - lastLoopTime;
-			lastLoopTime = now;
-			double delta = updateLength / ((double) OPTIMAL_TIME);
-
-			time.setDeltaTime(delta);
-
-			input();
-
-			update();
-
-			render();
-
-			// update the frame counter
-			lastFpsTime += updateLength;
-			frameCount++;
-
-			// update FPS
-			if (lastFpsTime >= 1000000000) {
-//				 System.out.println("FPS: " + FPS + ", Delta: " + delta);
-//				frame.setTitle(TITLE + "  -  FPS: " + FPS);
-				FPS = frameCount;
-				lastFpsTime = 0;
-				frameCount = 0;
+		while(true){
+			while (running) {
+				long now = System.nanoTime();
+				long updateLength = now - lastLoopTime;
+				lastLoopTime = now;
+				double delta = updateLength / ((double) OPTIMAL_TIME);
+	
+				time.setDeltaTime(delta);
+	
+				input();
+	
+				update();
+	
+				render();
+	
+				// update the frame counter
+				lastFpsTime += updateLength;
+				frameCount++;
+	
+				// update FPS
+				if (lastFpsTime >= 1000000000) {
+	//				 System.out.println("FPS: " + FPS + ", Delta: " + delta);
+	//				frame.setTitle(TITLE + "  -  FPS: " + FPS);
+					FPS = frameCount;
+					lastFpsTime = 0;
+					frameCount = 0;
+				}
+	
+				// wait for present
+				try {
+					Thread.sleep((long) ((lastLoopTime - System.nanoTime() + OPTIMAL_TIME) / 1000000));
+				} catch (Exception e) {
+				}
 			}
-
-			// wait for present
-			try {
-				Thread.sleep((long) ((lastLoopTime - System.nanoTime() + OPTIMAL_TIME) / 1000000));
-			} catch (Exception e) {
-			}
+			System.out.println("");
 		}
 	}
 

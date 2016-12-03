@@ -2,7 +2,7 @@ package core;
 
 import java.util.Scanner;
 
-import renderer.Gizmo;
+import render.Gizmo;
 
 public class Console extends Thread{
 

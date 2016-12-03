@@ -8,16 +8,17 @@ import game.scene.Scene_2;
 
 public class Main {
 	public static void main(String[] args) {
-		Core main = new Core(new Scene_1());
-		JFrame frame = new JFrame(Core.TITLE);
+
+		JFrame frame = new JFrame("My Game");
+		Core main = new Core(new Scene_2());
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().add(main.renderer);
+		frame.getContentPane().add(main.renderer);		
 		frame.setResizable(false);
 		frame.pack();
 		frame.setLocationByPlatform(true);
 		frame.setVisible(true);
 
-		main.run();
+		main.start();
 	}
 }
