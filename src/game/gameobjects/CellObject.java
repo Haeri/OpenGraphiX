@@ -11,7 +11,7 @@ import core.GraphiXObject;
 import core.Time;
 import physics.CircleCollider;
 import primitives.Camera;
-import game.scripts.Cell;
+import game.scripts.CellBehaviour;
 import game.scripts.Circular;
 import game.scripts.Rotator;
 
@@ -27,7 +27,7 @@ public class CellObject extends GraphiXObject{
 		
 		addComponent(new CircleCollider(radius, true, this));
 		addComponent(new Rigidbody(this));
-		addComponent(new Cell(radius, this));
+		addComponent(new CellBehaviour(radius, this));
 		addComponent(new ObjectRenderer(this, 1) {			
 			@Override
 			public void draw(Graphics2D g2d) {
@@ -43,7 +43,7 @@ public class CellObject extends GraphiXObject{
 //				g2d.drawLine(0, 0, (int)radius, 0);
 				
 				g2d.setColor(Color.WHITE);
-				g2d.drawString((int)((Cell)(CellObject.this.getComponent(Cell.class))).mass + "", -5, 5);
+				g2d.drawString((int)((CellBehaviour)(CellObject.this.getComponent(CellBehaviour.class))).mass + "", -5, 5);
 			}
 		});
 		addComponent(new Circular(this));
