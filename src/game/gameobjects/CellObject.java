@@ -1,19 +1,16 @@
 package game.gameobjects;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
 import component.ObjectRenderer;
 import component.Rigidbody;
 import core.GraphiXObject;
-import core.Time;
 import physics.CircleCollider;
 import primitives.Camera;
 import game.scripts.CellBehaviour;
 import game.scripts.Circular;
-import game.scripts.Rotator;
 
 public class CellObject extends GraphiXObject{
 

@@ -18,4 +18,8 @@ public class Transform extends Component {
 	public Vector2 forward(){
 		return new Vector2(Math.cos(rotation), Math.sin(rotation));
 	}
+	
+	public void translate(Vector2 position){}
+	public void rotate(double rotation){}
+	public void scale(Vector2 scale){}
 }

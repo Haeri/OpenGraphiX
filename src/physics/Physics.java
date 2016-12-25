@@ -1,21 +1,19 @@
 package physics;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import component.Collider;
 import component.Rigidbody;
 import core.Vector2;
-import render.Gizmo;
 
 public class Physics{
 	
 	public static final Vector2 EARTH = new Vector2(0, 9.81);
+	public static final Vector2 LIGHT_EARTH = new Vector2(0, 0.0981);
 	public static final Vector2 SPACE = new Vector2(0, 0);
 	
 	public static Vector2 gravity;
@@ -25,7 +23,7 @@ public class Physics{
 	
 	public Physics(){
 		bodies = new ArrayList<Rigidbody>();
-		collisionMap = new CollisionMap(2000, 2000, 2);
+		collisionMap = new CollisionMap(2000, 2000, 40);
 	}
 	
 	public static void addRigidbody(Rigidbody rb){
@@ -56,50 +54,55 @@ public class Physics{
 		gravity = g;
 	}
 	
+	public static Vector2 reflect(Vector2 in, Vector2 surfaceNormal, double elasticity){
+		return surfaceNormal.mul(-(1 + elasticity) * (Vector2.dot(in, surfaceNormal))).add(in);
+	}
+	
 	public void update() {
 		collisionMap.update();
 
-//		ExecutorService executor = Executors.newFixedThreadPool(1);
-//		for (int i = 0; i < CollisionMap.colliders.size(); i++){
-//			Runnable worker = new WorkerThread(i);
-//		    executor.execute(worker);
-//		}
-//		executor.shutdown();
-//		
-//		while (!executor.isTerminated()) {
-//		}
-		
-		
-		
+		ExecutorService executor = Executors.newFixedThreadPool(40);
 		for(Map.Entry<Integer, List<Collider>> entry : CollisionMap.map.entrySet()){
-			List<Collider> cols = entry.getValue();
-			
-			for(int i = 0; i < cols.size()-1; i++){
-				for(int j = i+1; j < cols.size(); j++){
-			
-					Vector2 ret = (cols.get(i).collide(cols.get(j)));
-					Rigidbody rb1 = cols.get(i).getComponent(Rigidbody.class);
-					Rigidbody rb2 = cols.get(j).getComponent(Rigidbody.class);
-
-					if (ret != null) {
-//						System.out.println(rb1.object.getID() + " <> " + rb2.object.getID());
-						if (cols.get(i).isTrigger || cols.get(j).isTrigger) {
-							cols.get(i).fire(cols.get(j));
-							cols.get(j).fire(cols.get(i));
-						} else {
-							if (rb1 != null) {
-								rb1.velocity = Vector2.reflect(rb1.velocity, ret);
-							}
-							if (rb2 != null) {
-								rb2.velocity = Vector2.reflect(rb2.velocity, ret.invert());
-							}
-						}
-						Gizmo.drawLine(cols.get(i).transform().position, cols.get(j).transform().position, Color.RED);
-					}else
-						Gizmo.drawLine(cols.get(i).transform().position, cols.get(j).transform().position, new Color(255, 230, 0, 100));
-				}	
-			}			
+			Runnable worker = new WorkerThread(entry.getValue());
+		    executor.execute(worker);
 		}
+		executor.shutdown();
+		
+		while (!executor.isTerminated()) {
+		}
+		
+		
+		
+//		for(Map.Entry<Integer, List<Collider>> entry : CollisionMap.map.entrySet()){
+//			List<Collider> cols = entry.getValue();
+//			
+//			for(int i = 0; i < cols.size()-1; i++){
+//				for(int j = i+1; j < cols.size(); j++){
+//			
+//					Vector2 ret = (cols.get(i).collide(cols.get(j)));
+//					Rigidbody rb1 = cols.get(i).getComponent(Rigidbody.class);
+//					Rigidbody rb2 = cols.get(j).getComponent(Rigidbody.class);
+//
+//					if (ret != null) {
+//						if (cols.get(i).isTrigger || cols.get(j).isTrigger) {
+//							cols.get(i).fire(cols.get(j));
+//							cols.get(j).fire(cols.get(i));
+//						} else {
+//							if (rb1 != null){
+//								rb1.velocity = reflect(rb1.velocity, ret, cols.get(i).elasticity);
+//								rb1.object.transform.position = rb1.object.transform.position.sub(rb1.oldVeclocity);
+//							}
+//							if (rb2 != null) {
+//								rb2.velocity = reflect(rb2.velocity, ret.invert(), cols.get(j).elasticity);
+//								rb2.object.transform.position = rb2.object.transform.position.sub(rb2.oldVeclocity);
+//							}
+//						}
+//						Gizmo.drawLine(cols.get(i).transform().position, cols.get(j).transform().position, Color.RED);
+//					}else
+//						Gizmo.drawLine(cols.get(i).transform().position, cols.get(j).transform().position, new Color(255, 230, 0, 100));
+//				}	
+//			}			
+//		}
 		
 		
 		
@@ -169,6 +172,7 @@ public class Physics{
 		
 		// Move the Rigidbodies
 		for (int i = 0; i < bodies.size(); i++){
+			bodies.get(i).oldVeclocity = bodies.get(i).velocity.clone();
 			bodies.get(i).addForce(gravity.mul(bodies.get(i).mass));
 			bodies.get(i).transform().position = bodies.get(i).transform().position.add(bodies.get(i).velocity);
 		}

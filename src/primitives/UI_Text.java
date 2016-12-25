@@ -3,7 +3,6 @@ package primitives;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import component.ObjectRenderer;
 import core.GraphiXObject;
 import render.UIRenderer;
 

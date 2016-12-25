@@ -1,27 +1,29 @@
-package primitives;
+package game.gameobjects;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
 import component.ObjectRenderer;
+import component.Rigidbody;
 import core.GraphiXObject;
-import javafx.scene.transform.MatrixType;
 import physics.RectCollider;
+import primitives.Camera;
+import game.scripts.Rotator;
 
-public class GO_Rect extends GraphiXObject {
+public class Player extends GraphiXObject {
 	public double width;
 	public double height;
 
 	public Color color;
 
-	public GO_Rect(double width, double height, Color color) {
+	public Player(double width, double height, Color color) {
 		super();
 		this.width = width;
 		this.height = height;
 		this.color = color;
 
-		// addComponent(new Rigidbody(this));
+		addComponent(new Rigidbody(this));
 		addComponent(new RectCollider(width, height, this));
 		addComponent(new ObjectRenderer(this, 0) {
 			public void draw(Graphics2D g2d) {
@@ -37,5 +39,6 @@ public class GO_Rect extends GraphiXObject {
 				
 			}
 		});
+		addComponent(new Rotator(this));
 	}
 }

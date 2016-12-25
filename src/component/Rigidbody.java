@@ -9,6 +9,8 @@ public class Rigidbody extends Component{
 	public Vector2 velocity = Vector2.ZERO;
 	public double mass = 1;
 	
+	public Vector2 oldVeclocity = Vector2.ZERO;
+	
 	public Rigidbody(GraphiXObject object){
 		super(object);
 		Physics.addRigidbody(this);
