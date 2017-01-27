@@ -5,10 +5,10 @@ import core.Vector2;
 public class Transform extends Component {
 
 	public Vector2 position;
-	public double rotation;
+	public float rotation;
 	public Vector2 scale;
 
-	public Transform(Vector2 position, double rotation, Vector2 scale, GraphiXObject object) {
+	public Transform(Vector2 position, float rotation, Vector2 scale, GraphiXObject object) {
 		super(object);
 		this.position = position;
 		this.rotation = rotation;
@@ -16,10 +16,10 @@ public class Transform extends Component {
 	}
 	
 	public Vector2 forward(){
-		return new Vector2(Math.cos(rotation), Math.sin(rotation));
+		return new Vector2((float)Math.cos(rotation), (float)Math.sin(rotation));
 	}
 	
 	public void translate(Vector2 position){}
-	public void rotate(double rotation){}
+	public void rotate(float rotation){}
 	public void scale(Vector2 scale){}
 }

@@ -2,9 +2,9 @@ package physics;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+
+import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.World;
 
 import component.Collider;
 import component.Rigidbody;
@@ -12,18 +12,21 @@ import core.Vector2;
 
 public class Physics{
 	
-	public static final Vector2 EARTH = new Vector2(0, 9.81);
-	public static final Vector2 LIGHT_EARTH = new Vector2(0, 0.0981);
+	public static final Vector2 EARTH = new Vector2(0, 9.81f);
 	public static final Vector2 SPACE = new Vector2(0, 0);
 	
-	public static Vector2 gravity;
+	public static Vector2 gravity = Vector2.ZERO;
 	
 	private static List<Rigidbody> bodies;
-	public static CollisionMap collisionMap;
+	public static List<Collider> colliders;
+	
+	public static World world;
 	
 	public Physics(){
 		bodies = new ArrayList<Rigidbody>();
-		collisionMap = new CollisionMap(2000, 2000, 40);
+		colliders = new ArrayList<Collider>();
+		
+		world = new World(new Vec2(gravity.x, gravity.y));
 	}
 	
 	public static void addRigidbody(Rigidbody rb){
@@ -31,7 +34,7 @@ public class Physics{
 	}
 	
 	public static void addCollider(Collider col){
-		collisionMap.add(col);
+		colliders.add(col);
 	}
 	
 	public static void removeFromRigidbody(Rigidbody rb){
@@ -39,7 +42,7 @@ public class Physics{
 	}
 	
 	public static void removeFromCollider(Collider col){
-		collisionMap.remove(col);
+		colliders.remove(col);
 	}
 	
 	public static int getBodies(){
@@ -47,134 +50,16 @@ public class Physics{
 	}
 	
 	public static int getColliders(){
-		return collisionMap.getSize();
+		return colliders.size();
 	}
 	
 	public static void setGravity(Vector2 g){
 		gravity = g;
-	}
-	
-	public static Vector2 reflect(Vector2 in, Vector2 surfaceNormal, double elasticity){
-		return surfaceNormal.mul(-(1 + elasticity) * (Vector2.dot(in, surfaceNormal))).add(in);
+		world.setGravity(new Vec2(gravity.x, gravity.y));
 	}
 	
 	public void update() {
-		collisionMap.update();
-
-		ExecutorService executor = Executors.newFixedThreadPool(40);
-		for(Map.Entry<Integer, List<Collider>> entry : CollisionMap.map.entrySet()){
-			Runnable worker = new WorkerThread(entry.getValue());
-		    executor.execute(worker);
-		}
-		executor.shutdown();
-		
-		while (!executor.isTerminated()) {
-		}
-		
-		
-		
-//		for(Map.Entry<Integer, List<Collider>> entry : CollisionMap.map.entrySet()){
-//			List<Collider> cols = entry.getValue();
-//			
-//			for(int i = 0; i < cols.size()-1; i++){
-//				for(int j = i+1; j < cols.size(); j++){
-//			
-//					Vector2 ret = (cols.get(i).collide(cols.get(j)));
-//					Rigidbody rb1 = cols.get(i).getComponent(Rigidbody.class);
-//					Rigidbody rb2 = cols.get(j).getComponent(Rigidbody.class);
-//
-//					if (ret != null) {
-//						if (cols.get(i).isTrigger || cols.get(j).isTrigger) {
-//							cols.get(i).fire(cols.get(j));
-//							cols.get(j).fire(cols.get(i));
-//						} else {
-//							if (rb1 != null){
-//								rb1.velocity = reflect(rb1.velocity, ret, cols.get(i).elasticity);
-//								rb1.object.transform.position = rb1.object.transform.position.sub(rb1.oldVeclocity);
-//							}
-//							if (rb2 != null) {
-//								rb2.velocity = reflect(rb2.velocity, ret.invert(), cols.get(j).elasticity);
-//								rb2.object.transform.position = rb2.object.transform.position.sub(rb2.oldVeclocity);
-//							}
-//						}
-//						Gizmo.drawLine(cols.get(i).transform().position, cols.get(j).transform().position, Color.RED);
-//					}else
-//						Gizmo.drawLine(cols.get(i).transform().position, cols.get(j).transform().position, new Color(255, 230, 0, 100));
-//				}	
-//			}			
-//		}
-		
-		
-		
-		
-		/*
-		for (int index = 0; index < CollisionMap.colliders.size(); index++){
-			List<Collider> cols = Physics.collisionMap.getNeighbours(CollisionMap.colliders.get(index));
-			System.out.println("Thread: " + index);
-			for (Collider other : cols) {
-				System.out.println(" " + other.object.getID());
-				if (other.object.getID() == CollisionMap.colliders.get(index).object.getID())
-					continue;
-				Vector2 ret = (CollisionMap.colliders.get(index).collide(other));
-				Rigidbody rb1 = CollisionMap.colliders.get(index).getComponent(Rigidbody.class);
-				Rigidbody rb2 = other.getComponent(Rigidbody.class);
-
-				if (ret != null) {
-					System.out.println(rb1.object.getID() + " <> " + rb2.object.getID());
-					if (CollisionMap.colliders.get(index).isTrigger || other.isTrigger) {
-						CollisionMap.colliders.get(index).fire(other);
-						other.fire(CollisionMap.colliders.get(index));
-					} else {
-						if (rb1 != null) {
-							rb1.velocity = Vector2.reflect(rb1.velocity, ret);
-						}
-						if (rb2 != null) {
-							rb2.velocity = Vector2.reflect(rb2.velocity, ret.invert());
-						}
-					}
-				}
-				Gizmo.drawLine(other.transform().position, CollisionMap.colliders.get(index).transform().position,
-						new Color(255, 230, 0, 100));
-			}
-			System.out.println();
-		}
-	        
-		*/
-
-		// Check collision		
-		
-		/*
-		for (int i = 0; i < CollisionMap.colliders.size()-1; i++){
-			for (int j = i+1; j < CollisionMap.colliders.size(); j++){
-				
-				Vector2 ret = (CollisionMap.colliders.get(i).collide(CollisionMap.colliders.get(j)));
-				Rigidbody rb1 = CollisionMap.colliders.get(i).getComponent(Rigidbody.class);
-				Rigidbody rb2 = CollisionMap.colliders.get(j).getComponent(Rigidbody.class);
-				
-				
-				if(ret != null){
-					if(CollisionMap.colliders.get(i).isTrigger || CollisionMap.colliders.get(j).isTrigger){
-						CollisionMap.colliders.get(i).fire(CollisionMap.colliders.get(j));
-						CollisionMap.colliders.get(j).fire(CollisionMap.colliders.get(i));
-					}else{
-						if(rb1 != null){							
-							rb1.velocity = Vector2.reflect(rb1.velocity, ret);
-						}
-						if(rb2 != null){
-							rb2.velocity = Vector2.reflect(rb2.velocity, ret.invert());							
-						}
-					}
-				}
-			}	
-		}
-		
-		*/
-		
-		// Move the Rigidbodies
-		for (int i = 0; i < bodies.size(); i++){
-			bodies.get(i).oldVeclocity = bodies.get(i).velocity.clone();
-			bodies.get(i).addForce(gravity.mul(bodies.get(i).mass));
-			bodies.get(i).transform().position = bodies.get(i).transform().position.add(bodies.get(i).velocity);
-		}
+		float step = 1.0f/60f;
+		world.step(step, 6, 2);
 	}
 }

@@ -3,7 +3,7 @@ package core;
 public class Bounds {
 	
 	public Vector2 min, max, center;
-	public double width, height;
+	public float width, height;
 	
 	public Bounds(Vector2 _min, Vector2 _max){
 		min = _min;

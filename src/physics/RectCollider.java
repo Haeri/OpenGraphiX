@@ -12,14 +12,14 @@ public class RectCollider extends Collider {
 	public Vector2 bottomLeft;
 	public Vector2 bottomRight;
 	public Vector2 pivot;
-	public double width;
-	public double height;
+	public float width;
+	public float height;
 
-	public RectCollider(double width, double height, GraphiXObject object) {
+	public RectCollider(float width, float height, GraphiXObject object) {
 		this(Vector2.ZERO, width, height, object);
 	}
 		
-	public RectCollider(Vector2 pivot, double width, double height, GraphiXObject object) {
+	public RectCollider(Vector2 pivot, float width, float height, GraphiXObject object) {
 		super(object);
 		this.width = width;
 		this.height = height;
@@ -89,7 +89,7 @@ public class RectCollider extends Collider {
 	//			isInsideY = true;
 	//		}
 	//		
-	//		double cdist = test.sub(object.transform.position).squareMagnitude();
+	//		float cdist = test.sub(object.transform.position).squareMagnitude();
 	//		
 	//		if(circleCol.getRadius() * circleCol.getRadius() >= cdist || (isInsideX && isInsideY)){
 	//			ret = object.transform.position.sub(test).normalize();

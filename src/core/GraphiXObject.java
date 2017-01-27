@@ -25,7 +25,7 @@ public class GraphiXObject {
 		components = new HashMap<>();
 		objs.add(this);
 		
-		transform = new Transform(new Vector2(0, 0), 0,  new Vector2(1.0, 1.0), this);
+		transform = new Transform(new Vector2(0, 0), 0,  new Vector2(1.0f, 1.0f), this);
 		addComponent(transform);
 	}
 	

@@ -26,7 +26,7 @@ public class ParticleSystem extends GraphiXScript{
 				GO_Circle cX = new GO_Circle(Math.random() * 3, new Color((int)(Math.random() * 0x1000000)));
 				cX.transform.position = object.transform.position.clone();
 				Rigidbody rb1 = cX.getComponent(Rigidbody.class);
-				rb1.velocity = new Vector2(Math.random()-0.5, Math.random()-0.5).normalize().mul(2);
+				rb1.velocity = new Vector2((float)Math.random()-0.5f, (float)Math.random()-0.5f).normalize().mul(2);
 				particles[cnt+i] = cX;
 			}else{
 				particles[cnt+i].transform.position = object.transform.position.clone();

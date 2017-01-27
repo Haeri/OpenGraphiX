@@ -10,9 +10,9 @@ import render.Gizmo;
 
 public class CircleCollider extends Collider{
 
-	public double radius;
+	public float radius;
 		
-	public CircleCollider(double radius, boolean isTrigger, GraphiXObject object){
+	public CircleCollider(float radius, boolean isTrigger, GraphiXObject object){
 		super(object);
 		super.isTrigger = isTrigger;
 		
@@ -20,7 +20,7 @@ public class CircleCollider extends Collider{
 		type = ColliderType.CIRCLE;
 	}
 	
-	public double getRadius(){
+	public float getRadius(){
 		return radius * object.transform.scale.x;
 	}
 	
@@ -38,8 +38,8 @@ public class CircleCollider extends Collider{
 		switch (other.type){
 			case CIRCLE:
 				CircleCollider circleCol = (CircleCollider)other;
-				double radDist = getRadius() + circleCol.getRadius();
-				double dist = circleCol.object.transform.position.sub(object.transform.position).squareMagnitude();
+				float radDist = getRadius() + circleCol.getRadius();
+				float dist = circleCol.object.transform.position.sub(object.transform.position).squareMagnitude();
 				if(radDist * radDist >= dist)
 					ret = object.transform.position.sub(circleCol.object.transform.position).normalize();
 				break;
@@ -96,7 +96,7 @@ public class CircleCollider extends Collider{
 					}
 				}
 				
-				double cdist = test.sub(object.transform.position).squareMagnitude();
+				float cdist = test.sub(object.transform.position).squareMagnitude();
 				
 				if(getRadius() * getRadius() >= cdist && (isInsideX && isInsideY)){
 					ret = object.transform.position.sub(test).normalize();

@@ -3,6 +3,8 @@ package game.scene;
 import java.awt.Color;
 import java.util.Random;
 
+import org.jbox2d.common.Vec2;
+
 import component.Rigidbody;
 import core.Scene;
 import core.Vector2;
@@ -27,19 +29,20 @@ public class Scene_2 extends Scene {
 //		Random rand = new Random(515);
 //        for(int i = 0; i < 1000; i++){
 //            GO_Circle c1 = new GO_Circle(/*Math.random() * */ 1, Color.RED);
-//            c1.transform.position = new Vector2((rand.nextDouble() * Renderer.WIDTH-200)+100, (rand.nextDouble() * Renderer.HEIGHT-200) + 100);
+//            c1.transform.position = new Vector2((rand.nextfloat() * Renderer.WIDTH-200)+100, (rand.nextfloat() * Renderer.HEIGHT-200) + 100);
 //            ((Rigidbody)c1.getComponent(Rigidbody.class)).mass = 1;
-//            ((Rigidbody)c1.getComponent(Rigidbody.class)).addForce(new Vector2(rand.nextDouble()*6-3, rand.nextDouble()*6-3));
+//            ((Rigidbody)c1.getComponent(Rigidbody.class)).addForce(new Vector2(rand.nextfloat()*6-3, rand.nextfloat()*6-3));
 //            ((CircleCollider)c1.getComponent(CircleCollider.class)).elasticity = 1;
 //        }
 		
 		
-		for(int i = 0; i < 6; i++){
-			GO_Circle c1 = new GO_Circle(/*Math.random() * */ 20, Color.RED);
-			c1.transform.position = new Vector2((Math.random() * Renderer.WIDTH-200)+100, (Math.random() * Renderer.HEIGHT-200) + 100);
-			((Rigidbody)c1.getComponent(Rigidbody.class)).mass = 3;
-			((Rigidbody)c1.getComponent(Rigidbody.class)).addForce(new Vector2(Math.random()*3-1.5, Math.random()*3-1.5));
-			   ((CircleCollider)c1.getComponent(CircleCollider.class)).elasticity = 0.87;
+		for(int i = 0; i < 1000; i++){
+			GO_Circle c1 = new GO_Circle(/*Math.random() * */ 2, Color.RED);
+			//c1.transform.position = new Vector2((Math.random() * Renderer.WIDTH-200)+100, (Math.random() * Renderer.HEIGHT-200) + 100);
+			c1.bd.setPosition(new Vec2((float)(Math.random() * Renderer.WIDTH-200)+100, (float)(Math.random() * Renderer.HEIGHT-200) + 100));
+		//	((Rigidbody)c1.getComponent(Rigidbody.class)).mass = 3;
+		//	((Rigidbody)c1.getComponent(Rigidbody.class)).addForce(new Vector2(Math.random()*3-1.5, Math.random()*3-1.5));
+		//	   ((CircleCollider)c1.getComponent(CircleCollider.class)).elasticity = 0.87;
 		}
 //		
 		
@@ -135,8 +138,9 @@ public class Scene_2 extends Scene {
 //		Player p = new Player(20, 50.0, Color.BLUE);
 //		p.transform.position = new Vector2(0, 0);
 //		
-		GO_Rect qbot = new GO_Rect(Renderer.WIDTH, 50.0, Color.DARK_GRAY);
-		qbot.transform.position = new Vector2(0, 300);
+		GO_Rect qbot = new GO_Rect(Renderer.WIDTH, 50.0f, Color.DARK_GRAY);
+		//qbot.aboutFloor.setPosition(new Vec2(0, -600));
+		qbot.body.setTransform(new Vec2(0, 400), 0);
 //		
 		
 //		GO_Rect bot = new GO_Rect(50, 100.0, Color.DARK_GRAY);

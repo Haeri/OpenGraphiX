@@ -1,8 +1,11 @@
 package core;
+
+import org.jbox2d.common.Vec2;
+
 public class Vector2 {
 
-	public double x;
-	public double y;
+	public float x;
+	public float y;
 	
 	public static final Vector2 ZERO = new Vector2(0, 0);
 	public static final Vector2 ONE = new Vector2(1, 1);
@@ -12,29 +15,33 @@ public class Vector2 {
 	public static final Vector2 LEFT = new Vector2(-1, 0); 
 	public static final Vector2 RIGHT = new Vector2(1, 0); 
 	
-	public Vector2(double x, double y) {
+	public Vector2(float x, float y) {
 		this.x = x;
 		this.y = y;
 	}
 	
-	public double squareMagnitude() {
+	public Vector2 (Vec2 vec){
+		this(vec.x, vec.y);
+	}
+	
+	public float squareMagnitude() {
 		return (x * x + y * y);
 	}
 	
-	public double magnitude() {
-		return Math.sqrt(x * x + y * y);
+	public float magnitude() {
+		return (float)Math.sqrt(x * x + y * y);
 	}
 	
-	public static double distance(Vector2 a, Vector2 b){
+	public static float distance(Vector2 a, Vector2 b){
 		return a.sub(b).magnitude();
 	}
 	
-	public static double sqareDistance(Vector2 a, Vector2 b){
+	public static float sqareDistance(Vector2 a, Vector2 b){
 		return a.sub(b).squareMagnitude();
 	}
 	
 	public Vector2 normalize() {
-		double tmp = this.magnitude();
+		float tmp = this.magnitude();
 		if(tmp == 0) return Vector2.ZERO;
 		x /= tmp;
 		y /= tmp;
@@ -60,11 +67,11 @@ public class Vector2 {
 	}
 
 	
-	public static double dot(Vector2 a, Vector2 b){
+	public static float dot(Vector2 a, Vector2 b){
 		return (a.x * b.x + a.y * b.y);
 	}
 	
-	public Vector2 mul(double m){
+	public Vector2 mul(float m){
 		return new Vector2(x * m, y * m);
 	}
 	
@@ -72,7 +79,7 @@ public class Vector2 {
 		return new Vector2(other.x * x, other.y * y);
 	}
 	
-	public Vector2 div(double m){
+	public Vector2 div(float m){
 		return new Vector2(x / m, y / m);
 	}
 	

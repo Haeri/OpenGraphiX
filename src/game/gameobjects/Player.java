@@ -12,12 +12,12 @@ import primitives.Camera;
 import game.scripts.Rotator;
 
 public class Player extends GraphiXObject {
-	public double width;
-	public double height;
+	public float width;
+	public float height;
 
 	public Color color;
 
-	public Player(double width, double height, Color color) {
+	public Player(float width, float height, Color color) {
 		super();
 		this.width = width;
 		this.height = height;

@@ -14,10 +14,10 @@ import game.scripts.Circular;
 
 public class CellObject extends GraphiXObject{
 
-	public double radius;
+	public float radius;
 	public Color color;
 	
-	public CellObject(double radius, Color color){
+	public CellObject(float radius, Color color){
 		super();
 		this.radius = radius;
 		this.color = color;

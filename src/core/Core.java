@@ -45,7 +45,11 @@ public class Core{
 		renderer.clearFlag = new Color(30, 30, 30);
 
 		physics = new Physics();
-		Physics.setGravity(Physics.LIGHT_EARTH);
+		Physics.setGravity(Physics.EARTH);
+		
+		
+		
+		
 
 		time = new Time();
 		

@@ -10,7 +10,6 @@ import component.Collider;
 import component.ObjectRenderer;
 import core.Core;
 import core.Vector2;
-import physics.CollisionMap;
 import physics.Physics;
 import primitives.Camera;
 
@@ -28,10 +27,7 @@ public class Gizmo {
 	}
 	
 	public static void drawUtil(){
-//		if(!isEnable) return;
-		for (int i = 0; i < Physics.getColliders(); i++){
-			CollisionMap.colliders.get(i).drawGizmo();
-		}
+
 	}
 	
 	public static void clear(){
