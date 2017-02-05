@@ -7,14 +7,17 @@ import java.util.List;
 import component.GraphiXScript;
 import physics.Physics;
 import primitives.Camera;
+import primitives.GO_Circle;
+import primitives.GO_ParticleSystem;
+import primitives.GO_Text;
 import primitives.UI_Text;
 import render.Renderer;
 
-public class Core{
+public class Core extends Thread{
 
 	public static boolean running;
 
-	public int TARGET_FPS = 58;
+	public int TARGET_FPS = 60;
 	public int FPS = 0;
 	
 	public Renderer renderer;
@@ -45,7 +48,7 @@ public class Core{
 		renderer.clearFlag = new Color(30, 30, 30);
 
 		physics = new Physics();
-		Physics.setGravity(Physics.LIGHT_EARTH);
+		Physics.setGravity(Physics.SPACE);
 
 		time = new Time();
 		
@@ -82,57 +85,49 @@ public class Core{
 		scripts.remove(gx);
 	}
 
-	public void runGameLoop(){
-		 Thread loop = new Thread()
-	      {
-	         public void run()
-	         {
-	            gameLoop();
-	         }
-	      };
-	      loop.start();		
-	}
-	
 	// Main Loop
-	public void gameLoop() {
+	public void run() {
 		
 		long lastFpsTime = 0;
 		int frameCount = 0;
 		long lastLoopTime = System.nanoTime();
 		double OPTIMAL_TIME = 1000000000.0 / TARGET_FPS;
 
-		while (running) {
-			long now = System.nanoTime();
-			long updateLength = now - lastLoopTime;
-			lastLoopTime = now;
-			double delta = updateLength / ((double) OPTIMAL_TIME);
-
-			time.setDeltaTime(delta);
-
-			input();
-
-			update();
-
-			render();
-
-			// update the frame counter
-			lastFpsTime += updateLength;
-			frameCount++;
-
-			// update FPS
-			if (lastFpsTime >= 1000000000) {
-//				 System.out.println("FPS: " + FPS + ", Delta: " + delta);
-//				frame.setTitle(TITLE + "  -  FPS: " + FPS);
-				FPS = frameCount;
-				lastFpsTime = 0;
-				frameCount = 0;
+		while(true){
+			while (running) {
+				long now = System.nanoTime();
+				long updateLength = now - lastLoopTime;
+				lastLoopTime = now;
+				double delta = updateLength / ((double) OPTIMAL_TIME);
+	
+				time.setDeltaTime(delta);
+	
+				input();
+	
+				update();
+	
+				render();
+	
+				// update the frame counter
+				lastFpsTime += updateLength;
+				frameCount++;
+	
+				// update FPS
+				if (lastFpsTime >= 1000000000) {
+	//				 System.out.println("FPS: " + FPS + ", Delta: " + delta);
+	//				frame.setTitle(TITLE + "  -  FPS: " + FPS);
+					FPS = frameCount;
+					lastFpsTime = 0;
+					frameCount = 0;
+				}
+	
+				// wait for present
+				try {
+					Thread.sleep((long) ((lastLoopTime - System.nanoTime() + OPTIMAL_TIME) / 1000000));
+				} catch (Exception e) {
+				}
 			}
-
-			// wait for present
-			try {
-				Thread.sleep((long) ((lastLoopTime - System.nanoTime() + OPTIMAL_TIME) / 1000000));
-			} catch (Exception e) {
-			}
+			System.out.println("");
 		}
 	}
 

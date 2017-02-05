@@ -2,6 +2,8 @@ package physics;
 
 import java.awt.Color;
 
+import com.sun.prism.Graphics;
+
 import component.Collider;
 import core.Bounds;
 import core.GraphiXObject;
@@ -76,7 +78,26 @@ public class CircleCollider extends Collider{
 					test.y = object.transform.position.y;					
 				}
 				
-				if(isInsideX && isInsideY){					
+				if(isInsideX && isInsideY){
+//					double dx = Math.min(object.transform.position.x - rectCol.toWorld(rectCol.topLeft).x, rectCol.toWorld(rectCol.topRight).x- object.transform.position.x);
+//					double dy = Math.min(object.transform.position.y - rectCol.toWorld(rectCol.topLeft).y, rectCol.toWorld(rectCol.bottomLeft).y- object.transform.position.y);
+//					
+//					
+//					
+//					if(object.transform.position.x <= rectCol.toWorld(rectCol.topRight.sub(rectCol.topLeft)).x+getRadius()*2)
+//						test.x = rectCol.toWorld(rectCol.topLeft).x;
+//					else
+//						test.x =rectCol.toWorld(rectCol.topRight).x;
+//						
+//					if(object.transform.position.y <= rectCol.toWorld(rectCol.topLeft.sub(rectCol.bottomLeft)).y+getRadius()*2)
+//						test.y = rectCol.toWorld(rectCol.topLeft).y;
+//					else
+//						test.y =rectCol.toWorld(rectCol.bottomLeft).y;
+					
+					
+					
+					
+					
 					if(object.transform.position.x <= rectCol.toWorld(rectCol.topLeft).x) {
 						test.x = rectCol.toWorld(rectCol.topLeft).x;
 					}else if(object.transform.position.x >= rectCol.toWorld(rectCol.topRight).x) {
@@ -98,11 +119,25 @@ public class CircleCollider extends Collider{
 				
 				double cdist = test.sub(object.transform.position).squareMagnitude();
 				
+//				Gizmo.drawCircle(test, 3, Color.BLUE);
+//				if(isInsideX && isInsideY){
+//					System.out.println("INSIDE");
+////					test = rectCol.transform().position.clone();
+//					ret = object.transform.position.sub(test).normalize();
+//				}else 
+//				System.out.println(test);
+				
 				if(getRadius() * getRadius() >= cdist && (isInsideX && isInsideY)){
+//					Gizmo.drawCircle(test, 6, Color.orange);
+//					System.out.println(object.transform.position + " " + test);
 					ret = object.transform.position.sub(test).normalize();
+//					System.out.println("CONTACT " + ret);
+					
+//					Gizmo.drawLine(test, test.add(ret).mul(3), Color.YELLOW);
 					try {
 						Thread.sleep(0);
 					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}

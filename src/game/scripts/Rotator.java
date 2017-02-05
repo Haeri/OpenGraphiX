@@ -1,8 +1,12 @@
 package game.scripts;
 
+import java.awt.Color;
+
 import component.GraphiXScript;
 import core.GraphiXObject;
 import core.InputManager;
+import core.Vector2;
+import render.Gizmo;
 
 public class Rotator extends GraphiXScript{
 	
@@ -20,6 +24,7 @@ public class Rotator extends GraphiXScript{
 		if(InputManager.KEY_DOWN) transform().position.y += 1;
 		if(InputManager.KEY_LEFT) transform().position.x -= 1;
 		if(InputManager.KEY_RIGHT) transform().position.x += 1;
+		
 	}
 
 }

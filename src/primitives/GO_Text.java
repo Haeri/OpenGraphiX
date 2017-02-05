@@ -1,11 +1,14 @@
 package primitives;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 
 import component.ObjectRenderer;
 import core.GraphiXObject;
+import render.Renderer;
 
 public class GO_Text extends GraphiXObject{
 

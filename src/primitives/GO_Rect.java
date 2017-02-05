@@ -1,13 +1,16 @@
 package primitives;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 
 import component.ObjectRenderer;
 import core.GraphiXObject;
-import javafx.scene.transform.MatrixType;
 import physics.RectCollider;
+import render.Renderer;
+import game.scripts.Rotator;
 
 public class GO_Rect extends GraphiXObject {
 	public double width;
@@ -37,5 +40,6 @@ public class GO_Rect extends GraphiXObject {
 				
 			}
 		});
+		addComponent(new Rotator(this));
 	}
 }

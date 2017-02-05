@@ -15,6 +15,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JInternalFrame;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -67,7 +68,6 @@ public class MainEditor {
 			public void actionPerformed(ActionEvent event) {
 				btnPause.setText(Core.running ? "Play" : "Pause");
 				Core.running = !Core.running;
-				if(Core.running)main.runGameLoop();
 			}
 		});
 		
@@ -85,6 +85,6 @@ public class MainEditor {
 		frame.setLocationByPlatform(true);
 		frame.setVisible(true);
 
-		main.runGameLoop();
+		main.start();
 	}
 }

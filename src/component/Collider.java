@@ -13,8 +13,8 @@ public abstract class Collider extends Component{
 
 	public enum ColliderType {CIRCLE, RECT, LINE, POLLY, POINT};
 	public ColliderType type;
-	public double elasticity = 1;
 	public boolean isTrigger;
+	public boolean processed = false;
 
 	private List<CollisionListener> listeners = new ArrayList<CollisionListener>();
 	

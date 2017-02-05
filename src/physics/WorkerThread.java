@@ -10,10 +10,10 @@ import render.Gizmo;
 
 public class WorkerThread implements Runnable {
 
-	private List<Collider> cols;
-	
-	public WorkerThread(List<Collider> cols) {
-		this.cols = cols;
+	private int index;
+
+	public WorkerThread(int index) {
+		this.index = index;
 	}
 
 	@Override
@@ -22,31 +22,33 @@ public class WorkerThread implements Runnable {
 	}
 
 	private void processCommand() {
-		for(int i = 0; i < cols.size()-1; i++){
-			for(int j = i+1; j < cols.size(); j++){
-		
-				Vector2 ret = (cols.get(i).collide(cols.get(j)));
-				Rigidbody rb1 = cols.get(i).getComponent(Rigidbody.class);
-				Rigidbody rb2 = cols.get(j).getComponent(Rigidbody.class);
+		List<Collider> cols = Physics.collisionMap.getNeighbours(CollisionMap.colliders.get(index));
+		System.out.println("Thread: " + index);
+		for (Collider other : cols) {
+			System.out.println(" " + other.object.getID());
+			if (other.object.getID() == CollisionMap.colliders.get(index).object.getID())
+				return;
+			Vector2 ret = (CollisionMap.colliders.get(index).collide(other));
+			Rigidbody rb1 = CollisionMap.colliders.get(index).getComponent(Rigidbody.class);
+			Rigidbody rb2 = other.getComponent(Rigidbody.class);
 
-				if (ret != null) {
-					if (cols.get(i).isTrigger || cols.get(j).isTrigger) {
-						cols.get(i).fire(cols.get(j));
-						cols.get(j).fire(cols.get(i));
-					} else {
-						if (rb1 != null){
-							rb1.velocity = Physics.reflect(rb1.velocity, ret, cols.get(i).elasticity);
-							rb1.object.transform.position = rb1.object.transform.position.sub(rb1.oldVeclocity);
-						}
-						if (rb2 != null) {
-							rb2.velocity = Physics.reflect(rb2.velocity, ret.invert(), cols.get(j).elasticity);
-							rb2.object.transform.position = rb2.object.transform.position.sub(rb2.oldVeclocity);
-						}
+			if (ret != null) {
+				System.out.println(rb1.object.getID() + " <> " + rb2.object.getID());
+				if (CollisionMap.colliders.get(index).isTrigger || other.isTrigger) {
+					CollisionMap.colliders.get(index).fire(other);
+					other.fire(CollisionMap.colliders.get(index));
+				} else {
+					if (rb1 != null) {
+						rb1.velocity = Vector2.reflect(rb1.velocity, ret);
 					}
-					Gizmo.drawLine(cols.get(i).transform().position, cols.get(j).transform().position, Color.RED);
-				}else
-					Gizmo.drawLine(cols.get(i).transform().position, cols.get(j).transform().position, new Color(255, 230, 0, 100));
-			}	
-		}			
+					if (rb2 != null) {
+						rb2.velocity = Vector2.reflect(rb2.velocity, ret.invert());
+					}
+				}
+			}
+			Gizmo.drawLine(other.transform().position, CollisionMap.colliders.get(index).transform().position,
+					new Color(255, 230, 0, 100));
+		}
+		System.out.println();
 	}
 }

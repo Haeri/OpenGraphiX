@@ -54,9 +54,10 @@ public class Vector2 {
 	}
 	
 	public static Vector2 reflect(Vector2 in, Vector2 surfaceNormal){
-		// Reflection
-		// V-2*(V dot N)*N
-		return surfaceNormal.mul(-2 * (Vector2.dot(in, surfaceNormal))).add(in);
+		 // Reflection -2*(V dot N)*N + V
+		
+		Vector2 ret = surfaceNormal.mul(-2 * (Vector2.dot(in, surfaceNormal))).add(in);
+		return ret;
 	}
 
 	

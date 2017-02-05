@@ -5,7 +5,7 @@ import core.GraphiXObject;
 
 public class Circular extends GraphiXScript {
 
-	public double size = 600;
+	public double size = 400;
 			
 	public Circular(GraphiXObject object) {
 		super(object);
