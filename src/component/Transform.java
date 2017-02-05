@@ -1,4 +1,6 @@
 package component;
+import org.jbox2d.common.Vec2;
+
 import core.GraphiXObject;
 import core.Vector2;
 

@@ -142,8 +142,8 @@ public class Core{
 
 	public void input() {
 		if(renderer.getMousePosition() != null && mouse != null){
-			mouse.transform.position.x = renderer.getMousePosition().x;
-			mouse.transform.position.y = renderer.getMousePosition().y;
+			mouse.transform.position.setx(renderer.getMousePosition().x);
+			mouse.transform.position.sety(renderer.getMousePosition().y);
 		}
 	}
 

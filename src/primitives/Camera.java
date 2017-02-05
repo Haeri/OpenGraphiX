@@ -24,8 +24,8 @@ public class Camera extends GraphiXObject {
 			} catch (NoMainCameraException e) {
 				e.printStackTrace();
 			}
-		return new Vector2(main.transform.position.x - Renderer.WIDTH / 2,
-				main.transform.position.y - Renderer.HEIGHT / 2);
+		return new Vector2(main.transform.position.getx() - Renderer.WIDTH / 2,
+				main.transform.position.gety() - Renderer.HEIGHT / 2);
 	}
 }
 

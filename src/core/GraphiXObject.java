@@ -2,8 +2,10 @@ package core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import component.Component;
 import component.Transform;
@@ -51,8 +53,16 @@ public class GraphiXObject {
 	 * @return returns the Component if it exists else null
 	 */
 	@SuppressWarnings("unchecked")
-	public <T extends Component> T getComponent(Class<?> c){
-		return (T) components.get(c);
+	public <T extends Component> T getComponent(Class<?> _class){
+	    Iterator<Entry<Class<?>, Object>> it = components.entrySet().iterator();
+	    while (it.hasNext()) {
+	    	Map.Entry<Class<?>, Object> pair = (Map.Entry<Class<?>, Object>)it.next();
+	    	if(_class.isAssignableFrom(pair.getKey()))
+	    		return (T) pair.getValue();
+	    }
+	
+	    return null;
+//		return (T) components.get(c);
 	}
 	
 	/*

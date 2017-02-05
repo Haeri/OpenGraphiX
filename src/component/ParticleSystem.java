@@ -23,13 +23,13 @@ public class ParticleSystem extends GraphiXScript{
 	public void Update(){
 		for(int i = 0; i < spawnRate; i++){
 			if(particles[cnt+i] == null){
-				GO_Circle cX = new GO_Circle(Math.random() * 3, new Color((int)(Math.random() * 0x1000000)));
-				cX.transform.position = object.transform.position.clone();
+				GO_Circle cX = new GO_Circle((float)Math.random() * 3, new Color((int)(Math.random() * 0x1000000)));
+				cX.transform.position = (Vector2) object.transform.position.clone();
 				Rigidbody rb1 = cX.getComponent(Rigidbody.class);
 				rb1.velocity = new Vector2((float)Math.random()-0.5f, (float)Math.random()-0.5f).normalize().mul(2);
 				particles[cnt+i] = cX;
 			}else{
-				particles[cnt+i].transform.position = object.transform.position.clone();
+				particles[cnt+i].transform.position = (Vector2) object.transform.position.clone();
 			}
 			if(cnt++ >= (ammount-spawnRate)) cnt = 0;
 		}

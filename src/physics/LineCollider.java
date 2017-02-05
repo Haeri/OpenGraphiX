@@ -2,6 +2,8 @@ package physics;
 
 import java.awt.Color;
 
+import org.jbox2d.collision.shapes.Shape;
+
 import component.Collider;
 import core.Bounds;
 import core.GraphiXObject;
@@ -12,6 +14,8 @@ public class LineCollider extends Collider {
 
 	public Vector2 a;
 	public Vector2 b;
+	
+	public Shape line;
 	
 	public LineCollider(Vector2 a, Vector2 b, GraphiXObject object){
 		super(object);
@@ -72,5 +76,10 @@ public class LineCollider extends Collider {
 	public Bounds getBounds() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Shape getShape() {
+		return line;
 	}
 }

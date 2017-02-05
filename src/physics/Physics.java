@@ -3,6 +3,7 @@ package physics;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jbox2d.common.Transform;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
 
@@ -26,7 +27,7 @@ public class Physics{
 		bodies = new ArrayList<Rigidbody>();
 		colliders = new ArrayList<Collider>();
 		
-		world = new World(new Vec2(gravity.x, gravity.y));
+		world = new World(new Vec2(gravity.getx(), gravity.gety()));
 	}
 	
 	public static void addRigidbody(Rigidbody rb){
@@ -55,11 +56,11 @@ public class Physics{
 	
 	public static void setGravity(Vector2 g){
 		gravity = g;
-		world.setGravity(new Vec2(gravity.x, gravity.y));
+		world.setGravity(new Vec2(gravity.getx(), gravity.gety()));
 	}
 	
 	public void update() {
 		float step = 1.0f/60f;
-		world.step(step, 6, 2);
+		world.step(step, 6, 2);				
 	}
 }

@@ -21,6 +21,6 @@ public class CircleRenderer extends ObjectRenderer{
 	@Override
 	public void draw(Graphics2D g2d) {
 		g2d.setColor(color);
-		g2d.fillOval((int)(object.transform.position.x - radius), (int)(object.transform.position.y - radius), (int)(radius * 2 * object.transform.scale.x), (int)(radius * 2 * object.transform.scale.y));
+		g2d.fillOval((int)(object.transform.position.getx() - radius), (int)(object.transform.position.gety() - radius), (int)(radius * 2 * object.transform.scale.getx()), (int)(radius * 2 * object.transform.scale.gety()));
 	}
 }

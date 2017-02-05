@@ -1,5 +1,8 @@
 package physics;
 
+import org.jbox2d.collision.shapes.PolygonShape;
+import org.jbox2d.collision.shapes.Shape;
+
 import component.Collider;
 import core.Bounds;
 import core.GraphiXObject;
@@ -14,6 +17,8 @@ public class RectCollider extends Collider {
 	public Vector2 pivot;
 	public float width;
 	public float height;
+	
+	public PolygonShape ps;
 
 	public RectCollider(float width, float height, GraphiXObject object) {
 		this(Vector2.ZERO, width, height, object);
@@ -38,7 +43,7 @@ public class RectCollider extends Collider {
 	}
 	
 	public Vector2 toWorld(Vector2 vec){
-		return new Vector2(transform().position.x + (vec.x * transform().scale.x), transform().position.y + (vec.y * transform().scale.y));
+		return new Vector2(transform().position.getx() + (vec.getx() * transform().scale.getx()), transform().position.gety() + (vec.gety() * transform().scale.gety()));
 	}
 //	
 //	public Vector2 topLeft(){
@@ -120,5 +125,10 @@ public class RectCollider extends Collider {
 	@Override
 	public Bounds getBounds() {
 		return new Bounds(toWorld(topLeft), toWorld(bottomRight));
+	}
+
+	@Override
+	public Shape getShape() {
+		return ps;
 	}
 }

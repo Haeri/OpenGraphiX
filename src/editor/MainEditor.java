@@ -3,7 +3,6 @@ package editor;
 import javax.swing.JFrame;
 
 import core.Core;
-import game.scene.Scene_1;
 import game.scene.Scene_2;
 import render.Gizmo;
 

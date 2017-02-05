@@ -25,13 +25,13 @@ public class TextRenderer extends ObjectRenderer{
 	@Override
 	public void draw(Graphics2D g2d) {
 		AffineTransform tx1 = new AffineTransform();
-		tx1.translate(transform().position.x - Camera.getMVP().x, transform().position.y - Camera.getMVP().y);
+		tx1.translate(transform().position.getx() - Camera.getMVP().getx(), transform().position.gety() - Camera.getMVP().gety());
 		tx1.rotate(transform().rotation);
-		tx1.scale(transform().scale.x, transform().scale.y);
+		tx1.scale(transform().scale.getx(), transform().scale.gety());
 		
 		g2d.setTransform(tx1);
 		g2d.setColor(((GO_Text)object).color);
-		g2d.drawString(text.text, (int)object.transform.position.x, (int)object.transform.position.y);
+		g2d.drawString(text.text, (int)object.transform.position.getx(), (int)object.transform.position.gety());
 	}
 
 }

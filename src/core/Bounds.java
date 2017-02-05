@@ -9,9 +9,9 @@ public class Bounds {
 		min = _min;
 		max = _max;
 		
-		width = _max.x -_min.x;
-		height = _max.y -_min.y;
-		center = new Vector2(_min.x + width/2, _min.y + height/2);
+		width = _max.getx() -_min.getx();
+		height = _max.gety() -_min.gety();
+		center = new Vector2(_min.getx() + width/2, _min.gety() + height/2);
 	}
 
 }

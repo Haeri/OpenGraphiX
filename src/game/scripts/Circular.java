@@ -8,14 +8,19 @@ public class Circular extends GraphiXScript {
 	public float size = 600;
 			
 	public Circular(GraphiXObject object) {
+		
+		//define shape of the body.
+//		CircleShape cs = new CircleShape();
+//		cs.m_radius = (float)radius;  
+		
 		super(object);
 	}
 
 	public void Update(){
-		if(transform().position.x > size) transform().position.x = ((transform().position.x + size) % size) - size;
-		if(transform().position.x < -size) transform().position.x = ((transform().position.x - size) % size) + size;
-		if(transform().position.y > size) transform().position.y = ((transform().position.y + size) % size) - size;
-		if(transform().position.y < -size) transform().position.y = ((transform().position.y - size) % size) + size;
+		if(transform().position.getx()> size) transform().position.setx(((transform().position.getx() + size) % size) - size);
+		if(transform().position.getx()< -size) transform().position.setx(((transform().position.getx() - size) % size) + size);
+		if(transform().position.gety()> size) transform().position.sety(((transform().position.gety() + size) % size) - size);
+		if(transform().position.gety()< -size) transform().position.sety(((transform().position.gety() - size) % size) + size);
 	}
 	
 }

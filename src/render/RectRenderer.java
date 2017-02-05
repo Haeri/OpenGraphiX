@@ -18,6 +18,6 @@ public class RectRenderer extends ObjectRenderer {
 	@Override
 	public void draw(Graphics2D g2d) {
 		g2d.setColor(rect.color);
-		g2d.fillRect((int)(rect.transform.position.x - rect.width/2), (int)(rect.transform.position.y - rect.height/2), (int)(rect.width * rect.transform.scale.x), (int)(rect.height * rect.transform.scale.y));
+		g2d.fillRect((int)(rect.transform.position.getx() - rect.width/2), (int)(rect.transform.position.gety() - rect.height/2), (int)(rect.width * rect.transform.scale.getx()), (int)(rect.height * rect.transform.scale.gety()));
 	}	
 }

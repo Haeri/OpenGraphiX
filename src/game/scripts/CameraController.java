@@ -16,13 +16,13 @@ public class CameraController extends GraphiXScript{
 	}
 	
 	public void Update(){
-		direction.x = 0;
-		direction.y = 0;
+		direction.setx(0);
+		direction.sety(0);
 		
-		if(InputManager.KEY_UP) direction.y = -1;
-		if(InputManager.KEY_DOWN) direction.y = 1;
-		if(InputManager.KEY_LEFT) direction.x = -1;
-		if(InputManager.KEY_RIGHT) direction.x = 1;
+		if(InputManager.KEY_UP) direction.sety(-1);
+		if(InputManager.KEY_DOWN) direction.sety(1);
+		if(InputManager.KEY_LEFT) direction.setx(-1);
+		if(InputManager.KEY_RIGHT) direction.setx(1);
 		
 		transform().position = transform().position.add(direction.normalize().mul(speed));
 	}

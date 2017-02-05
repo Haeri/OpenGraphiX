@@ -3,6 +3,8 @@ package component;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jbox2d.collision.shapes.Shape;
+
 import core.Bounds;
 import core.GraphiXObject;
 import core.Vector2;
@@ -31,9 +33,11 @@ public abstract class Collider extends Component{
 		return this;
 	}
 	
+	public abstract Shape getShape();
+	
 	public abstract Bounds getBounds();
 	
-	public abstract Vector2 collide(Collider other);
+	//public abstract Vector2 collide(Collider other);
 
 	public abstract void drawGizmo();
 

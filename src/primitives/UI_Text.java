@@ -20,7 +20,7 @@ public class UI_Text extends GraphiXObject{
 			@Override
 			public void draw(Graphics2D g2d) {
 				g2d.setColor(((UI_Text)object).color);
-				g2d.drawString(UI_Text.this.text, (int)transform.position.x, (int)transform.position.y);
+				g2d.drawString(UI_Text.this.text, (int)transform.position.getx(), (int)transform.position.gety());
 			}
 		});
 	}

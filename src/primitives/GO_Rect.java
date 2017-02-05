@@ -34,20 +34,15 @@ public class GO_Rect extends GraphiXObject {
 		this.height = height;
 		this.color = color;
 
-		// addComponent(new Rigidbody(this));
+//		addComponent(new Rigidbody(this));
 //		addComponent(new RectCollider(width, height, this));
 		addComponent(new ObjectRenderer(this, 0) {
 			public void draw(Graphics2D g2d) {
-
-				
-				transform.position.x = body.getPosition().x; 
-				transform.position.y = body.getPosition().y;
-
 				
 				AffineTransform tx1 = new AffineTransform();
-				tx1.translate(transform.position.x - Camera.getMVP().x, transform.position.y - Camera.getMVP().y);
+				tx1.translate(transform.position.getx() - Camera.getMVP().getx(), transform.position.gety() - Camera.getMVP().gety());
 				tx1.rotate(transform.rotation);
-				tx1.scale(transform.scale.x, transform.scale.y);
+				tx1.scale(transform.scale.getx(), transform.scale.gety());
 
 				g2d.setTransform(tx1);
 				g2d.setColor(color);

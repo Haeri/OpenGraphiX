@@ -40,7 +40,7 @@ public class Gizmo {
 	public static synchronized void drawLine(Vector2 a, Vector2 b, Color c){
 		if(!isEnable) return;
 		g2.setColor(c);
-		g2.drawLine((int)(a.x - Camera.getMVP().x), (int)(a.y - Camera.getMVP().y), (int)(b.x - Camera.getMVP().x), (int)(b.y - Camera.getMVP().y));
+		g2.drawLine((int)(a.getx()- Camera.getMVP().getx()), (int)(a.gety() - Camera.getMVP().gety()), (int)(b.getx()- Camera.getMVP().getx()), (int)(b.gety() - Camera.getMVP().gety()));
 	}
 
 	public static void drawRect(Vector2 pos, double width, double height, Color c){
@@ -51,21 +51,21 @@ public class Gizmo {
 		if(!isEnable) return;
 		g2.setColor(c);
 		if(filled)
-			g2.fillRect((int)(pos.x-width/2 - Camera.getMVP().x), (int)(pos.y-height/2 - Camera.getMVP().y), (int)width, (int)height);
+			g2.fillRect((int)(pos.getx()-width/2 - Camera.getMVP().getx()), (int)(pos.gety()-height/2 - Camera.getMVP().gety()), (int)width, (int)height);
 		else
-			g2.drawRect((int)(pos.x-width/2 - Camera.getMVP().x), (int)(pos.y-height/2 - Camera.getMVP().y), (int)width, (int)height);
+			g2.drawRect((int)(pos.getx()-width/2 - Camera.getMVP().getx()), (int)(pos.gety()-height/2 - Camera.getMVP().gety()), (int)width, (int)height);
 	}
 	
 	public static void drawCircle(Vector2 pos, double r, Color c){
 		if(!isEnable) return;
 		g2.setColor(c);
-		g2.drawOval((int)(pos.x-r - Camera.getMVP().x), (int)(pos.y-r - Camera.getMVP().y), (int)(r*2), (int)(r*2));
+		g2.drawOval((int)(pos.getx()-r - Camera.getMVP().getx()), (int)(pos.gety()-r - Camera.getMVP().gety()), (int)(r*2), (int)(r*2));
 	}
 	
 	public static void drawText(Vector2 pos, String text, Color c){
 		if(!isEnable) return;
 		g2.setColor(c);
-		g2.drawString(text, (int)(pos.x - Camera.getMVP().x), (int)(pos.y - Camera.getMVP().y));
+		g2.drawString(text, (int)(pos.getx()- Camera.getMVP().getx()), (int)(pos.gety() - Camera.getMVP().gety()));
 	}
 	
 	public static BufferedImage getFrame(){

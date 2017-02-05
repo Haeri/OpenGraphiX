@@ -39,11 +39,22 @@ public class Scene_2 extends Scene {
 		for(int i = 0; i < 1000; i++){
 			GO_Circle c1 = new GO_Circle(/*Math.random() * */ 2, Color.RED);
 			//c1.transform.position = new Vector2((Math.random() * Renderer.WIDTH-200)+100, (Math.random() * Renderer.HEIGHT-200) + 100);
-			c1.bd.setPosition(new Vec2((float)(Math.random() * Renderer.WIDTH-200)+100, (float)(Math.random() * Renderer.HEIGHT-200) + 100));
+			((Rigidbody)c1.getComponent(Rigidbody.class)).body.setTransform(new Vec2((float)(Math.random() * Renderer.WIDTH-200)+100, (float)(Math.random() * Renderer.HEIGHT-200) + 100), 0);
+			//c1.transform.position = new Vector2((float)(Math.random() * Renderer.WIDTH-200)+100, (float)(Math.random() * Renderer.HEIGHT-200) + 100);
 		//	((Rigidbody)c1.getComponent(Rigidbody.class)).mass = 3;
 		//	((Rigidbody)c1.getComponent(Rigidbody.class)).addForce(new Vector2(Math.random()*3-1.5, Math.random()*3-1.5));
 		//	   ((CircleCollider)c1.getComponent(CircleCollider.class)).elasticity = 0.87;
 		}
+		
+		
+//		GO_Circle c1 = new GO_Circle(2, Color.RED);
+//		((Rigidbody)c1.getComponent(Rigidbody.class)).body.setTransform(new Vec2(10, 10), 0);
+//	
+//		GO_Circle c2 = new GO_Circle(2, Color.RED);
+//		((Rigidbody)c2.getComponent(Rigidbody.class)).body.setTransform(new Vec2(30, 30), 0);
+		
+		//c2.transform.position = new Vector2(10, 10);
+		
 //		
 		
 //		GO_ParticleSystem c1 = new GO_ParticleSystem(10);
@@ -140,8 +151,9 @@ public class Scene_2 extends Scene {
 //		
 		GO_Rect qbot = new GO_Rect(Renderer.WIDTH, 50.0f, Color.DARK_GRAY);
 		//qbot.aboutFloor.setPosition(new Vec2(0, -600));
-		qbot.body.setTransform(new Vec2(0, 400), 0);
-//		
+		qbot.body.setTransform(new Vec2(100, 600), 0);
+		qbot.transform.position.setVector(qbot.body.getPosition());
+		//((Rigidbody)qbot.getComponent(Rigidbody.class)).body.setTransform(new Vec2(0, 400), 0);
 		
 //		GO_Rect bot = new GO_Rect(50, 100.0, Color.DARK_GRAY);
 //		bot.transform.position = new Vector2(100, -100);
