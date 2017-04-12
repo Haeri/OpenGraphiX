@@ -4,10 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
-import component.ObjectRenderer;
-import core.GraphiXObject;
+import core.GameObject;
+import render.component.ObjectRenderer;
 
-public class GO_Text extends GraphiXObject{
+public class GO_Text extends GameObject{
 
 	public String text;
 	public Color color;
@@ -18,7 +18,7 @@ public class GO_Text extends GraphiXObject{
 		this.color = color;
 		
 //		addComponent(new TextRenderer(text, color, this, 1));
-		addComponent(new ObjectRenderer(this, 10) {
+		addComponent(new ObjectRenderer(10) {
 			@Override
 			public void draw(Graphics2D g2d) {
 				AffineTransform tx1 = new AffineTransform();

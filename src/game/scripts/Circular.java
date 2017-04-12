@@ -1,19 +1,18 @@
 package game.scripts;
 
-import component.GraphiXScript;
-import core.GraphiXObject;
+import core.GameObject;
+import core.component.GXScript;
 
-public class Circular extends GraphiXScript {
+public class Circular extends GXScript {
 
 	public float size = 600;
 			
-	public Circular(GraphiXObject object) {
+	public Circular() {
 		
 		//define shape of the body.
 //		CircleShape cs = new CircleShape();
 //		cs.m_radius = (float)radius;  
-		
-		super(object);
+
 	}
 
 	public void Update(){

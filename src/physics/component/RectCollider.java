@@ -1,39 +1,37 @@
-package physics;
+package physics.component;
 
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.collision.shapes.Shape;
 
-import component.Collider;
 import core.Bounds;
-import core.GraphiXObject;
-import core.Vector2;
+import core.GameObject;
+import core.Vector2f;
 
 public class RectCollider extends Collider {
 
-	public Vector2 topLeft;
-	public Vector2 topRight;
-	public Vector2 bottomLeft;
-	public Vector2 bottomRight;
-	public Vector2 pivot;
+	public Vector2f topLeft;
+	public Vector2f topRight;
+	public Vector2f bottomLeft;
+	public Vector2f bottomRight;
+	public Vector2f pivot;
 	public float width;
 	public float height;
 	
 	public PolygonShape ps;
 
-	public RectCollider(float width, float height, GraphiXObject object) {
-		this(Vector2.ZERO, width, height, object);
+	public RectCollider(float width, float height) {
+		this(Vector2f.ZERO, width, height);
 	}
 		
-	public RectCollider(Vector2 pivot, float width, float height, GraphiXObject object) {
-		super(object);
+	public RectCollider(Vector2f pivot, float width, float height) {
 		this.width = width;
 		this.height = height;
 		this.pivot = pivot;
 		
-		this.topLeft = new Vector2(-width/2, -height/2);
-		this.topRight = new Vector2(width/2, -height/2);
-		this.bottomLeft = new Vector2(-width/2, height/2);
-		this.bottomRight = new Vector2(width/2, height/2);			
+		this.topLeft = new Vector2f(-width/2, -height/2);
+		this.topRight = new Vector2f(width/2, -height/2);
+		this.bottomLeft = new Vector2f(-width/2, height/2);
+		this.bottomRight = new Vector2f(width/2, height/2);			
 		
 		type = ColliderType.RECT;
 	}
@@ -42,8 +40,8 @@ public class RectCollider extends Collider {
 	//	Gizmo.drawRect(transform().position, width * transform().scale.x, height * transform().scale.y, Color.GREEN);
 	}
 	
-	public Vector2 toWorld(Vector2 vec){
-		return new Vector2(transform().position.getx() + (vec.getx() * transform().scale.getx()), transform().position.gety() + (vec.gety() * transform().scale.gety()));
+	public Vector2f toWorld(Vector2f vec){
+		return new Vector2f(transform().position.getx() + (vec.getx() * transform().scale.getx()), transform().position.gety() + (vec.gety() * transform().scale.gety()));
 	}
 //	
 //	public Vector2 topLeft(){
@@ -64,8 +62,8 @@ public class RectCollider extends Collider {
 	
 
 
-	public Vector2 collide(Collider other) {
-		Vector2 ret = null;
+	public Vector2f collide(Collider other) {
+		Vector2f ret = null;
 
 		switch (other.type) {
 		case CIRCLE:

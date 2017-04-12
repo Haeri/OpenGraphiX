@@ -1,18 +1,17 @@
 package game.scripts;
 
-import component.GraphiXScript;
-import core.GraphiXObject;
 import core.InputManager;
-import core.Vector2;
+import core.Time;
+import core.Vector2f;
+import core.component.GXScript;
 
-public class CameraController extends GraphiXScript{
+public class CameraController extends GXScript{
 
 	public float speed = 3;
-	private Vector2 direction = new Vector2(0f, 0f);
+	private Vector2f direction = new Vector2f(0f, 0f);
 	
 	
-	public CameraController(GraphiXObject object) {
-		super(object);
+	public CameraController() {
 	}
 	
 	public void Update(){
@@ -24,7 +23,8 @@ public class CameraController extends GraphiXScript{
 		if(InputManager.KEY_LEFT) direction.setx(-1);
 		if(InputManager.KEY_RIGHT) direction.setx(1);
 		
-		transform().position = transform().position.add(direction.normalize().mul(speed));
+		Vector2f dir = direction.normalize().mul(speed).mul((float)Time.deltaTime());
+		transform().position = transform().position.add(dir);
 	}
 
 }

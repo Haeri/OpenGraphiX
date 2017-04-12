@@ -5,10 +5,10 @@ import java.util.List;
 
 public abstract class Scene {
 	
-	public List<GraphiXObject> objects;
+	public List<GameObject> objects;
 	
 	public Scene(){
-		objects = new ArrayList<GraphiXObject>();
+		objects = new ArrayList<GameObject>();
 	}
 	
 	public void Start(){}

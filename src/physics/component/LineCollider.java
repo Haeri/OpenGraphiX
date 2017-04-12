@@ -1,34 +1,32 @@
-package physics;
+package physics.component;
 
 import java.awt.Color;
 
 import org.jbox2d.collision.shapes.Shape;
 
-import component.Collider;
 import core.Bounds;
-import core.GraphiXObject;
-import core.Vector2;
+import core.GameObject;
+import core.Vector2f;
 import render.Gizmo;
 
 public class LineCollider extends Collider {
 
-	public Vector2 a;
-	public Vector2 b;
+	public Vector2f a;
+	public Vector2f b;
 	
 	public Shape line;
 	
-	public LineCollider(Vector2 a, Vector2 b, GraphiXObject object){
-		super(object);
+	public LineCollider(Vector2f a, Vector2f b){
 		this.a = a;
 		this.b = b;
 		type = ColliderType.LINE;
 	}
 	
-	public Vector2 getA(){
+	public Vector2f getA(){
 		return a;
 	}
 	
-	public Vector2 getB(){
+	public Vector2f getB(){
 		return b;
 	}
 	
@@ -36,8 +34,8 @@ public class LineCollider extends Collider {
 		Gizmo.drawLine(a, b, Color.GREEN);
 	}
 	
-	public Vector2 collide(Collider other){
-		Vector2 ret = null;
+	public Vector2f collide(Collider other){
+		Vector2f ret = null;
 		
 		switch (other.type){
 			case CIRCLE:
@@ -52,7 +50,7 @@ public class LineCollider extends Collider {
 				
 				double dist = (2/_c) * Math.sqrt(_s*(_s-_a)*(_s-_b)*(_s-_c));
 				if(dist <= col.radius)
-					ret = Vector2.ONE;
+					ret = Vector2f.ONE;
 				
 				break;
 			case LINE:

@@ -3,10 +3,10 @@ package primitives;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import core.GraphiXObject;
-import render.UIRenderer;
+import core.GameObject;
+import render.component.UIRenderer;
 
-public class UI_Text extends GraphiXObject{
+public class UI_Text extends GameObject{
 
 	public String text;
 	public Color color;
@@ -16,7 +16,7 @@ public class UI_Text extends GraphiXObject{
 		this.text = text;
 		this.color = color;
 		
-		addComponent(new UIRenderer(this, 10) {
+		addComponent(new UIRenderer(10) {
 			@Override
 			public void draw(Graphics2D g2d) {
 				g2d.setColor(((UI_Text)object).color);

@@ -12,14 +12,14 @@ import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
 
-import component.ObjectRenderer;
-import core.GraphiXObject;
+import core.GameObject;
 import javafx.scene.transform.MatrixType;
 import physics.Physics;
-import physics.RectCollider;
+import physics.component.RectCollider;
 import render.Renderer;
+import render.component.ObjectRenderer;
 
-public class GO_Rect extends GraphiXObject {
+public class GO_Rect extends GameObject {
 	public float width;
 	public float height;
 
@@ -36,7 +36,7 @@ public class GO_Rect extends GraphiXObject {
 
 //		addComponent(new Rigidbody(this));
 //		addComponent(new RectCollider(width, height, this));
-		addComponent(new ObjectRenderer(this, 0) {
+		addComponent(new ObjectRenderer(0) {
 			public void draw(Graphics2D g2d) {
 				
 				AffineTransform tx1 = new AffineTransform();

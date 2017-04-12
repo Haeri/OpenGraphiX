@@ -1,17 +1,21 @@
-package component;
+package core.component;
 
-import core.GraphiXObject;
+import core.Component;
 import core.Core;
 
-public abstract class GraphiXScript extends Component {
+public abstract class GXScript extends Component {
 
 	private boolean notImplemented = false;
 	
-	public GraphiXScript(GraphiXObject object) {
-		super(object);
+	public GXScript() {
 		try{Update();}catch(Exception e){}
 		if(!notImplemented)
 			Core.addToUpdate(this);
+	}
+	
+	public void init(){
+		Awake();
+		Start();
 	}
 	
 	/**
@@ -26,8 +30,18 @@ public abstract class GraphiXScript extends Component {
 	 */
 	public void Destroy(){}
 	
+	/**
+	 * Start gets called at the beginning of the runtime and before the Start method
+	 */
+	public void Awake(){}
+	
+	/**
+	 * Start gets called at the beginning of the runtime
+	 */
+	public void Start(){}
+	
 
-	public final void _destroy(){
+	protected final void _destroy(){
 		Destroy();
 		if(!notImplemented)
 			Core.removeFromUpdate(this);

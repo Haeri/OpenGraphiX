@@ -1,23 +1,21 @@
-package render;
+package render.component;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
-import component.ObjectRenderer;
-import core.GraphiXObject;
-import core.Text;
+import core.GameObject;
 import primitives.Camera;
 import primitives.GO_Text;
 
 public class TextRenderer extends ObjectRenderer{
 
-	private Text text;
+	public String text;
 	private Color color;
 	
-	public TextRenderer(Text text, Color color, GraphiXObject object, int order) {
-		super(object, order);
+	public TextRenderer(String text, Color color, int order) {
+		super(order);
 		this.text = text;
 		this.color = color;
 	}
@@ -31,7 +29,7 @@ public class TextRenderer extends ObjectRenderer{
 		
 		g2d.setTransform(tx1);
 		g2d.setColor(((GO_Text)object).color);
-		g2d.drawString(text.text, (int)object.transform.position.getx(), (int)object.transform.position.gety());
+		g2d.drawString(text, (int)object.transform.position.getx(), (int)object.transform.position.gety());
 	}
 
 }

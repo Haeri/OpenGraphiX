@@ -4,14 +4,14 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
-import component.ObjectRenderer;
-import component.Rigidbody;
-import core.GraphiXObject;
-import physics.RectCollider;
+import core.GameObject;
+import physics.component.RectCollider;
+import physics.component.Rigidbody;
 import primitives.Camera;
+import render.component.ObjectRenderer;
 import game.scripts.Rotator;
 
-public class Player extends GraphiXObject {
+public class Player extends GameObject {
 	public float width;
 	public float height;
 
@@ -23,9 +23,9 @@ public class Player extends GraphiXObject {
 		this.height = height;
 		this.color = color;
 
-		addComponent(new Rigidbody(this));
-		addComponent(new RectCollider(width, height, this));
-		addComponent(new ObjectRenderer(this, 0) {
+		addComponent(new Rigidbody());
+		addComponent(new RectCollider(width, height));
+		addComponent(new ObjectRenderer(0) {
 			public void draw(Graphics2D g2d) {
 
 				AffineTransform tx1 = new AffineTransform();
@@ -39,6 +39,6 @@ public class Player extends GraphiXObject {
 				
 			}
 		});
-		addComponent(new Rotator(this));
+		addComponent(new Rotator());
 	}
 }

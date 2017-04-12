@@ -1,16 +1,16 @@
-package component;
+package render.component;
 
 import java.awt.Graphics2D;
 
-import core.GraphiXObject;
+import core.Component;
+import core.GameObject;
 import render.Renderer;
 
 public abstract class ObjectRenderer extends Component{
 	
 	public int order;
 	
-	public ObjectRenderer(GraphiXObject object, int order){
-		super(object);
+	public ObjectRenderer(int order){
 		this.order = order;
 		Renderer.addToDrawCall(this, order);
 	}

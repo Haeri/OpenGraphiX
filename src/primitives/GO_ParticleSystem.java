@@ -1,15 +1,15 @@
 package primitives;
 
-import component.ParticleSystem;
-import component.Rigidbody;
-import core.GraphiXObject;
-import physics.CircleCollider;
+import core.GameObject;
+import core.component.ParticleSystem;
+import physics.component.CircleCollider;
+import physics.component.Rigidbody;
 
-public class GO_ParticleSystem extends GraphiXObject{
+public class GO_ParticleSystem extends GameObject{
 
 	public GO_ParticleSystem(int spawnRate){
-		addComponent(new ParticleSystem(spawnRate, this));
-		addComponent(new Rigidbody(this));
-		addComponent(new CircleCollider(10, false, this));
+		addComponent(new ParticleSystem(spawnRate));
+		addComponent(new Rigidbody());
+		addComponent(new CircleCollider(10, false));
 	}
 }

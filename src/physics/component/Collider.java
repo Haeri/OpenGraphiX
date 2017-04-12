@@ -1,4 +1,4 @@
-package component;
+package physics.component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,9 @@ import java.util.List;
 import org.jbox2d.collision.shapes.Shape;
 
 import core.Bounds;
-import core.GraphiXObject;
-import core.Vector2;
+import core.Component;
+import core.GameObject;
+import core.Vector2f;
 import physics.CollisionListener;
 import physics.Physics;
 
@@ -20,8 +21,7 @@ public abstract class Collider extends Component{
 
 	private List<CollisionListener> listeners = new ArrayList<CollisionListener>();
 	
-	public Collider(GraphiXObject object) {
-		super(object);
+	public void Start() {
 		Physics.addCollider(this);
 	}
 

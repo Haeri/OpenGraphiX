@@ -1,13 +1,12 @@
 package game.scripts;
 
-import component.GraphiXScript;
-import core.GraphiXObject;
+import core.GameObject;
 import core.InputManager;
+import core.component.GXScript;
 
-public class Rotator extends GraphiXScript{
+public class Rotator extends GXScript{
 	
-	public Rotator(GraphiXObject object) {
-		super(object);
+	public Rotator() {
 	}
 
 	public void Update(){

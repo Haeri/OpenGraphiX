@@ -1,4 +1,4 @@
-package component;
+package physics.component;
 
 import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.Shape;
@@ -7,30 +7,26 @@ import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
 
-import core.GraphiXObject;
-import core.Vector2;
+import core.Component;
+import core.GameObject;
+import core.Vector2f;
 import physics.Physics;
 
 public class Rigidbody extends Component{
 
-	public Vector2 velocity = Vector2.ZERO;
+	public Vector2f velocity = Vector2f.ZERO;
 	public float mass = 1;
 	
-	public Vector2 oldVeclocity = Vector2.ZERO;
+	public Vector2f oldVeclocity = Vector2f.ZERO;
 	public BodyDef bodyDef;
 	public Body body;
 	
-	public Rigidbody(GraphiXObject object){
-		super(object);
-		
+	public Rigidbody(){}
+	
+	public void init(){
 		bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DYNAMIC;
 		 
-		
-//		//define shape of the body.
-//		CircleShape cs = new CircleShape();
-//		cs.m_radius = (float)2;  
-		
 		//define fixture of the body.
 		FixtureDef fd = new FixtureDef();
 		fd.shape = ((Collider) object.getComponent(Collider.class)).getShape();
@@ -52,8 +48,8 @@ public class Rigidbody extends Component{
 	 * Apply force to the Rigidbody
 	 * @param force, The force to be applied
 	 */
-	public void addForce(Vector2 force){
-		Vector2 acceleration = force.div(mass);
+	public void addForce(Vector2f force){
+		Vector2f acceleration = force.div(mass);
 		velocity = velocity.add(acceleration);
 	}
 	

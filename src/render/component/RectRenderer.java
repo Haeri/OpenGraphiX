@@ -1,9 +1,8 @@
-package render;
+package render.component;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import component.ObjectRenderer;
 import primitives.GO_Rect;
 
 public class RectRenderer extends ObjectRenderer {
@@ -11,7 +10,7 @@ public class RectRenderer extends ObjectRenderer {
 	private GO_Rect rect;
 	
 	public RectRenderer(GO_Rect rect, int order) {
-		super(rect, order);
+		super(order);
 		this.rect = rect;
 	}
 

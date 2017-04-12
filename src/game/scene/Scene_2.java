@@ -1,15 +1,12 @@
 package game.scene;
 
 import java.awt.Color;
-import java.util.Random;
 
 import org.jbox2d.common.Vec2;
 
-import component.Rigidbody;
 import core.Scene;
-import core.Vector2;
-import game.gameobjects.Player;
-import physics.CircleCollider;
+import game.scripts.CameraController;
+import physics.component.Rigidbody;
 import primitives.Camera;
 import primitives.GO_Circle;
 import primitives.GO_Rect;
@@ -22,147 +19,26 @@ public class Scene_2 extends Scene {
 	public void Start() {
 		
 		Camera cam = new Camera();
+		cam.addComponent(new CameraController());
 				
 		Gizmo.isEnable = false;
 		
-		
-//		Random rand = new Random(515);
-//        for(int i = 0; i < 1000; i++){
-//            GO_Circle c1 = new GO_Circle(/*Math.random() * */ 1, Color.RED);
-//            c1.transform.position = new Vector2((rand.nextfloat() * Renderer.WIDTH-200)+100, (rand.nextfloat() * Renderer.HEIGHT-200) + 100);
-//            ((Rigidbody)c1.getComponent(Rigidbody.class)).mass = 1;
-//            ((Rigidbody)c1.getComponent(Rigidbody.class)).addForce(new Vector2(rand.nextfloat()*6-3, rand.nextfloat()*6-3));
-//            ((CircleCollider)c1.getComponent(CircleCollider.class)).elasticity = 1;
-//        }
-		
-		
-		for(int i = 0; i < 1000; i++){
-			GO_Circle c1 = new GO_Circle(/*Math.random() * */ 2, Color.RED);
-			//c1.transform.position = new Vector2((Math.random() * Renderer.WIDTH-200)+100, (Math.random() * Renderer.HEIGHT-200) + 100);
+		for(int i = 0; i < 3000; i++){
+			GO_Circle c1 = new GO_Circle(1, Color.RED);
 			((Rigidbody)c1.getComponent(Rigidbody.class)).body.setTransform(new Vec2((float)(Math.random() * Renderer.WIDTH-200)+100, (float)(Math.random() * Renderer.HEIGHT-200) + 100), 0);
-			//c1.transform.position = new Vector2((float)(Math.random() * Renderer.WIDTH-200)+100, (float)(Math.random() * Renderer.HEIGHT-200) + 100);
-		//	((Rigidbody)c1.getComponent(Rigidbody.class)).mass = 3;
-		//	((Rigidbody)c1.getComponent(Rigidbody.class)).addForce(new Vector2(Math.random()*3-1.5, Math.random()*3-1.5));
-		//	   ((CircleCollider)c1.getComponent(CircleCollider.class)).elasticity = 0.87;
 		}
 		
 		
-//		GO_Circle c1 = new GO_Circle(2, Color.RED);
-//		((Rigidbody)c1.getComponent(Rigidbody.class)).body.setTransform(new Vec2(10, 10), 0);
-//	
-//		GO_Circle c2 = new GO_Circle(2, Color.RED);
-//		((Rigidbody)c2.getComponent(Rigidbody.class)).body.setTransform(new Vec2(30, 30), 0);
-		
-		//c2.transform.position = new Vector2(10, 10);
-		
-//		
-		
-//		GO_ParticleSystem c1 = new GO_ParticleSystem(10);
-//		c1.transform.position = new Vector2((Math.random() * Renderer.WIDTH-200)+100, (Math.random() * Renderer.HEIGHT-200) + 100);
-//		((Rigidbody)c1.getComponent(Rigidbody.class)).addForce(new Vector2(Math.random()*5-2.5, Math.random()*5-2.5));
-//		
-//		GO_ParticleSystem c2 = new GO_ParticleSystem(10);
-//		c2.transform.position = new Vector2((Math.random() * Renderer.WIDTH-200)+100, (Math.random() * Renderer.HEIGHT-200) + 100);
-//		((Rigidbody)c2.getComponent(Rigidbody.class)).addForce(new Vector2(Math.random()*5-2.5, Math.random()*5-2.5));
-		
-//		Vector2 force = new Vector2(20, 20);
-//		
-//		GO_Circle c1 = new GO_Circle(40.0, Color.RED);
-//		c1.transform.position = new Vector2(-100, 13);
-//		((Rigidbody)c1.getComponent(Rigidbody.class)).mass = 1;
-//		((CircleCollider)c1.getComponent(CircleCollider.class)).elasticity = 0.8;
-//		((Rigidbody)c1.getComponent(Rigidbody.class)).addForce(new Vector2(-2.4, -20.2));
-//		
-		
-//		GO_Circle c2 = new GO_Circle(10.0, Color.RED);
-//		c2.transform.position = new Vector2(100, 13);
-//		((Rigidbody)c2.getComponent(Rigidbody.class)).mass = 1;
-//		((Rigidbody)c2.getComponent(Rigidbody.class)).addForce(Vector2.LEFT);
-//		
-//		GO_Circle c3 = new GO_Circle(10.0, Color.RED);
-//		c3.transform.position = new Vector2(-100, 100);
-//		((Rigidbody)c3.getComponent(Rigidbody.class)).mass = 1;
-//		((Rigidbody)c3.getComponent(Rigidbody.class)).addForce(Vector2.RIGHT);
-//		
-//		GO_Circle c4 = new GO_Circle(10.0, Color.RED);
-//		c4.transform.position = new Vector2(100, 100);
-//		((Rigidbody)c4.getComponent(Rigidbody.class)).mass = 1;
-//		((Rigidbody)c4.getComponent(Rigidbody.class)).addForce(Vector2.LEFT);
-//		
-//		
-		
-//		int max = 2;
-//		
-//		for(int i = 0; i < max; i++){
-//			GO_Circle c1 = new GO_Circle(20.0, Color.RED);
-//			c1.transform.position = new Vector2(-200, i*80);
-//			((Rigidbody)c1.getComponent(Rigidbody.class)).mass = 1;
-//			((Rigidbody)c1.getComponent(Rigidbody.class)).addForce(Vector2.RIGHT);
-//			
-//			GO_Circle c2 = new GO_Circle(20.0, Color.RED);
-//			c2.transform.position = new Vector2(200, i*80);
-//			((Rigidbody)c2.getComponent(Rigidbody.class)).mass = 1;
-//			((Rigidbody)c2.getComponent(Rigidbody.class)).addForce(Vector2.LEFT);
-//			((CircleCollider)c2.getComponent(CircleCollider.class)).elasticity = 0.4;
-//			
-			
-//			GO_Circle c3 = new GO_Circle(20.0, Color.RED);
-//			c3.transform.position = new Vector2(i*80, -200);
-//			((Rigidbody)c3.getComponent(Rigidbody.class)).mass = 1;
-//			((Rigidbody)c3.getComponent(Rigidbody.class)).addForce(Vector2.DOWN);
-//			
-//			GO_Circle c4 = new GO_Circle(20.0, Color.RED);
-//			c4.transform.position = new Vector2(i*80, 200);
-//			((Rigidbody)c4.getComponent(Rigidbody.class)).mass = 1;
-//			((Rigidbody)c4.getComponent(Rigidbody.class)).addForce(Vector2.UP);
-//		}
-		
-		
-		
-//		GO_Circle c3 = new GO_Circle(20.0, Color.RED);
-//		c3.transform.position = new Vector2(0, 0);
-//		((Rigidbody)c3.getComponent(Rigidbody.class)).mass = 1;
-//		((Rigidbody)c3.getComponent(Rigidbody.class)).addForce(new Vector2(-1, -1));
-//		
-//		GO_Circle c4 = new GO_Circle(20.0, Color.RED);
-//		c4.transform.position = new Vector2(-200, -200);
-//		((Rigidbody)c4.getComponent(Rigidbody.class)).mass = 1;
-//		((Rigidbody)c4.getComponent(Rigidbody.class)).addForce(Vector2.ONE);
-		
-		
-//		
-//		GO_Circle c3 = new GO_Circle(10.0, Color.RED);
-//		c3.transform.position = new Vector2(500, 200);
-//		((Rigidbody)c3.getComponent(Rigidbody.class)).mass = 10;
-//		((Rigidbody)c3.getComponent(Rigidbody.class)).addForce(force);
-//		
-//		GO_Circle c4 = new GO_Circle(90.0, Color.RED);
-//		c4.transform.position = new Vector2(700, 200);
-//		((Rigidbody)c4.getComponent(Rigidbody.class)).mass = 90;
-//		((Rigidbody)c4.getComponent(Rigidbody.class)).addForce(force);
-		
-		
-//		GO_Rect qtop = new GO_Rect(Renderer.WIDTH, 20.0, Color.DARK_GRAY);
-//		qtop.transform.position = new Vector2(Renderer.WIDTH / 2, -10);
-//
-        
-//		Player p = new Player(20, 50.0, Color.BLUE);
-//		p.transform.position = new Vector2(0, 0);
-//		
 		GO_Rect qbot = new GO_Rect(Renderer.WIDTH, 50.0f, Color.DARK_GRAY);
-		//qbot.aboutFloor.setPosition(new Vec2(0, -600));
-		qbot.body.setTransform(new Vec2(100, 600), 0);
+		qbot.body.setTransform(new Vec2(400, 600), 0);
 		qbot.transform.position.setVector(qbot.body.getPosition());
-		//((Rigidbody)qbot.getComponent(Rigidbody.class)).body.setTransform(new Vec2(0, 400), 0);
 		
-//		GO_Rect bot = new GO_Rect(50, 100.0, Color.DARK_GRAY);
-//		bot.transform.position = new Vector2(100, -100);
-//		
-//
-//		GO_Rect qleft = new GO_Rect(20, Renderer.HEIGHT, Color.DARK_GRAY);
-//		qleft.transform.position = new Vector2(-10, Renderer.HEIGHT / 2);
-//
-//		GO_Rect qright = new GO_Rect(20, Renderer.HEIGHT, Color.DARK_GRAY);
-//		qright.transform.position = new Vector2(Renderer.WIDTH + 10, Renderer.HEIGHT / 2);
+		GO_Rect qbot2 = new GO_Rect(200, 50.0f, Color.DARK_GRAY);
+		qbot2.body.setTransform(new Vec2(100, 400), 0);
+		qbot2.transform.position.setVector(qbot2.body.getPosition());
+		
+		GO_Rect qbot3 = new GO_Rect(200, 50.0f, Color.DARK_GRAY);
+		qbot3.body.setTransform(new Vec2(200, 500), 0);
+		qbot3.transform.position.setVector(qbot3.body.getPosition());
 	}
 }

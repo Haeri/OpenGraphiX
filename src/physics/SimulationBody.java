@@ -1,7 +1,7 @@
 package physics;
 
-import component.Collider;
-import component.Rigidbody;
+import physics.component.Collider;
+import physics.component.Rigidbody;
 
 public class SimulationBody{
 	public Rigidbody rigidbody;

@@ -1,11 +1,11 @@
 package primitives;
 
-import core.GraphiXObject;
-import core.Vector2;
+import core.GameObject;
+import core.Vector2f;
 import game.scripts.CameraController;
 import render.Renderer;
 
-public class Camera extends GraphiXObject {
+public class Camera extends GameObject {
 
 	public static Camera main;
 
@@ -13,18 +13,16 @@ public class Camera extends GraphiXObject {
 		super();
 		if (main == null)
 			main = this;
-
-		addComponent(new CameraController(this));
 	}
 
-	public static Vector2 getMVP() {
+	public static Vector2f getMVP() {
 		if (main == null)
 			try {
 				throw new NoMainCameraException("There is no main camera in the scene");
 			} catch (NoMainCameraException e) {
 				e.printStackTrace();
 			}
-		return new Vector2(main.transform.position.getx() - Renderer.WIDTH / 2,
+		return new Vector2f(main.transform.position.getx() - Renderer.WIDTH / 2,
 				main.transform.position.gety() - Renderer.HEIGHT / 2);
 	}
 }

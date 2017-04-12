@@ -1,14 +1,13 @@
-package physics;
+package physics.component;
 
 import java.awt.Color;
 
 import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.Shape;
 
-import component.Collider;
 import core.Bounds;
-import core.GraphiXObject;
-import core.Vector2;
+import core.GameObject;
+import core.Vector2f;
 import render.Gizmo;
 
 public class CircleCollider extends Collider{
@@ -16,15 +15,15 @@ public class CircleCollider extends Collider{
 	public CircleShape cs;
 	public float radius;
 		
-	public CircleCollider(float radius, boolean isTrigger, GraphiXObject object){
-		super(object);
+	public CircleCollider(float radius, boolean isTrigge){
 		super.isTrigger = isTrigger;
-		
 		this.radius = radius;
 		type = ColliderType.CIRCLE;
-		
+	}
+	
+	public void init(){
 		cs = new CircleShape();
-		cs.m_radius = radius;  
+		cs.m_radius = radius;  		
 	}
 	
 	public float getRadius(){
@@ -36,7 +35,7 @@ public class CircleCollider extends Collider{
 	}
 	
 	public Bounds getBounds(){
-		return new Bounds(new Vector2(-getRadius()+ transform().position.getx(), -getRadius()+ transform().position.gety()), new Vector2(getRadius()+ transform().position.getx(), getRadius()+ transform().position.gety()));
+		return new Bounds(new Vector2f(-getRadius()+ transform().position.getx(), -getRadius()+ transform().position.gety()), new Vector2f(getRadius()+ transform().position.getx(), getRadius()+ transform().position.gety()));
 	}
 	
 	public Shape getShape(){

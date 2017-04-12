@@ -7,66 +7,65 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import component.Component;
-import component.Transform;
+import core.component.Transform;
 
-public class GraphiXObject {
+public class GameObject {
 	
-	public boolean enabled;
+	public boolean toDestroy = false;
 	public Transform transform;
 
-	public boolean toDestroy = false;
+	private boolean enabled = false;
 	private Map<Class<?>, Object> components;
-	private static List<GraphiXObject> objs = new ArrayList<GraphiXObject>();
+	private static List<GameObject> objs = new ArrayList<GameObject>();
 	private int OBJECT_ID;
 	private static int objectCnt = 0;
 			
 	
-	public GraphiXObject(){
+	public GameObject(){
 		OBJECT_ID = objectCnt++;
 		components = new HashMap<>();
 		objs.add(this);
 		
-		transform = new Transform(new Vector2(0, 0), 0,  new Vector2(1.0f, 1.0f), this);
+		transform = new Transform(new Vector2f(0, 0), 0,  new Vector2f(1.0f, 1.0f));
 		addComponent(transform);
 	}
 	
 	/**
-	 * Unique ID of this GraphiXObject
+	 * Unique ID of this GameObject
 	 * @return returns the ID
 	 */
 	public int getID(){
 		return OBJECT_ID;
 	}
-	
+
 	/**
-	 * Add a component to the GraphiXObject
+	 * Add a component to the GameObject
 	 * @param c, Component to be added
 	 */
-	protected void addComponent(Component c){
+	public void addComponent(Component c){
+		c.object = this;
+		c.init();
 		components.put(c.getClass(), c);
 	}
 	
 	/**
 	 * Get a component by Class
-	 * @param c, The Class to be returned
+	 * @param classType, The Class to be returned
 	 * @return returns the Component if it exists else null
 	 */
 	@SuppressWarnings("unchecked")
-	public <T extends Component> T getComponent(Class<?> _class){
+	public <T extends Component> T getComponent(Class<?> classType){
 	    Iterator<Entry<Class<?>, Object>> it = components.entrySet().iterator();
 	    while (it.hasNext()) {
 	    	Map.Entry<Class<?>, Object> pair = (Map.Entry<Class<?>, Object>)it.next();
-	    	if(_class.isAssignableFrom(pair.getKey()))
+	    	if(classType.isAssignableFrom(pair.getKey()))
 	    		return (T) pair.getValue();
 	    }
-	
 	    return null;
-//		return (T) components.get(c);
 	}
 	
 	/*
-	 * Destroy the GraphiXObject
+	 * Destroy the GameObject
 	 */
 	public void destroyGO(){
 		toDestroy = true;

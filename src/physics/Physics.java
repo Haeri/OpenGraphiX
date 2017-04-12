@@ -7,16 +7,16 @@ import org.jbox2d.common.Transform;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
 
-import component.Collider;
-import component.Rigidbody;
-import core.Vector2;
+import core.Vector2f;
+import physics.component.Collider;
+import physics.component.Rigidbody;
 
 public class Physics{
 	
-	public static final Vector2 EARTH = new Vector2(0, 9.81f);
-	public static final Vector2 SPACE = new Vector2(0, 0);
+	public static final Vector2f EARTH = new Vector2f(0, 9.81f);
+	public static final Vector2f SPACE = new Vector2f(0, 0);
 	
-	public static Vector2 gravity = Vector2.ZERO;
+	public static Vector2f gravity = Vector2f.ZERO;
 	
 	private static List<Rigidbody> bodies;
 	public static List<Collider> colliders;
@@ -54,7 +54,7 @@ public class Physics{
 		return colliders.size();
 	}
 	
-	public static void setGravity(Vector2 g){
+	public static void setGravity(Vector2f g){
 		gravity = g;
 		world.setGravity(new Vec2(gravity.getx(), gravity.gety()));
 	}

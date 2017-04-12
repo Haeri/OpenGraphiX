@@ -18,8 +18,13 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class MainEditor {
+	
+	public static Console console;
+	
 	public static void main(String[] args) {
 
+		console = new Console("OpenGraphiX");
+		
 		JFrame frame = new JFrame(Core.TITLE);
 		// Style
 		// Changes to System Look and Feel
@@ -38,8 +43,6 @@ public class MainEditor {
 		Core main = new Core(new Scene_2());
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//		frame.getContentPane().add(main.renderer);
-
 		
 		JPanel panel = new JPanel();
 				

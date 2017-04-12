@@ -11,10 +11,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import render.component.ObjectRenderer;
+import render.component.UIRenderer;
+
 import java.util.Set;
 import java.util.TreeMap;
-
-import component.ObjectRenderer;
 
 public class Renderer extends Canvas {
 	
@@ -96,7 +98,7 @@ public class Renderer extends Canvas {
 		Set<Entry<Integer, List<ObjectRenderer>>> set = drawCalls.entrySet();
 		Iterator<Entry<Integer, List<ObjectRenderer>>> iterator = set.iterator();
 		while (iterator.hasNext()) {
-			Map.Entry mentry = (Map.Entry) iterator.next();
+			Entry<Integer, List<ObjectRenderer>> mentry = iterator.next();
 			ArrayList<ObjectRenderer> rend = (ArrayList<ObjectRenderer>) mentry.getValue();
 
 			for (int i = 0; i < rend.size(); i++) {

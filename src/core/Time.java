@@ -11,4 +11,8 @@ public class Time {
 	public static double deltaTime(){
 		return deltaTime;
 	}
+	
+	public static float deltaTimef(){
+		return (float)deltaTime;
+	}
 }

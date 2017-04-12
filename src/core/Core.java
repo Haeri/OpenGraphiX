@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import component.GraphiXScript;
+import core.component.GXScript;
 import physics.Physics;
 import primitives.Camera;
 import primitives.UI_Text;
@@ -14,7 +14,7 @@ public class Core{
 
 	public static boolean running;
 
-	public int TARGET_FPS = 58;
+	public int TARGET_FPS = 600;
 	public int FPS = 0;
 	
 	public Renderer renderer;
@@ -24,15 +24,12 @@ public class Core{
 
 	public static final String TITLE = "GraphiX";
 
-	private static List<GraphiXScript> scripts;
+	private static List<GXScript> scripts;
 
 	public UI_Text deltaString;
 	public UI_Text drawCallString;
 	public UI_Text physicsString;
 
-//	public GizmoCircle mouse;
-//	public GO_ParticleSystem mouse;
-//	public GO_Circle mouse;
 	public Camera mouse;
 	
 	public Core(Scene scene){
@@ -40,49 +37,39 @@ public class Core{
 	}
 	
 	public Core(Scene scene, int width, int height) {
-//		this.setDaemon(true);
 		renderer = new Renderer(width, height);
 		renderer.clearFlag = new Color(30, 30, 30);
 
 		physics = new Physics();
 		Physics.setGravity(Physics.EARTH);
 		
-		
-		
-		
-
 		time = new Time();
 		
 		inputManager = new InputManager();
 
 		new Console().start();
 		
-		scripts = new ArrayList<GraphiXScript>();
+		scripts = new ArrayList<GXScript>();
 
 		running = true;
 
 		deltaString = new UI_Text("Delta!", Color.WHITE);
-		deltaString.transform.position = new Vector2(10, 15);
+		deltaString.transform.position = new Vector2f(10, 15);
 
 		drawCallString = new UI_Text("DrawCalls", Color.WHITE);
-		drawCallString.transform.position = new Vector2(10, 30);
+		drawCallString.transform.position = new Vector2f(10, 30);
 		
 		physicsString = new UI_Text("Physics", Color.WHITE);
-		physicsString.transform.position = new Vector2(10, 45);
-
-//		mouse = new GizmoCircle(3, Color.GREEN);
-//		mouse = new GO_ParticleSystem(10);
-//		mouse = new GO_Circle(20, Color.GREEN);
-//		mouse = new Camera();
+		physicsString.transform.position = new Vector2f(10, 45);
 		
 		scene.Start();
 	}
 
-	public static void addToUpdate(GraphiXScript gx) {
+	public static void addToUpdate(GXScript gx) {
 		scripts.add(gx);
 	}
 
-	public static void removeFromUpdate(GraphiXScript gx) {
+	public static void removeFromUpdate(GXScript gx) {
 		scripts.remove(gx);
 	}
 
@@ -125,8 +112,6 @@ public class Core{
 
 			// update FPS
 			if (lastFpsTime >= 1000000000) {
-//				 System.out.println("FPS: " + FPS + ", Delta: " + delta);
-//				frame.setTitle(TITLE + "  -  FPS: " + FPS);
 				FPS = frameCount;
 				lastFpsTime = 0;
 				frameCount = 0;
@@ -158,7 +143,7 @@ public class Core{
 		
 		physics.update();
 		
-		GraphiXObject.finalDestroy();
+		GameObject.finalDestroy();
 	}
 
 	public void render() {

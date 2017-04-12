@@ -1,6 +1,6 @@
 package physics;
 
-import component.Collider;
+import physics.component.Collider;
 
 public interface CollisionListener {
 
