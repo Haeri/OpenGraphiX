@@ -2,8 +2,6 @@ package physics;
 
 import java.awt.Color;
 
-import com.sun.prism.Graphics;
-
 import component.Collider;
 import core.Bounds;
 import core.GraphiXObject;

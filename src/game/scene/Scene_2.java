@@ -22,10 +22,10 @@ public class Scene_2 extends Scene {
 		
 		Gizmo.isEnable = true;
 		
-		for(int i = 0; i < 30; i++){
-			GO_Circle c1 = new GO_Circle(/*Math.random() * */ 20, Color.RED);
+		for(int i = 0; i < 100; i++){
+			GO_Circle c1 = new GO_Circle(/*Math.random() * */ 10, Color.RED);
 			c1.transform.position = new Vector2((Math.random() * Renderer.WIDTH-200)+100, (Math.random() * Renderer.HEIGHT-200) + 100);
-			((Rigidbody)c1.getComponent(Rigidbody.class)).mass = 1;
+			c1.<Rigidbody>getComponent(Rigidbody.class).mass = 1;
 			((Rigidbody)c1.getComponent(Rigidbody.class)).addForce(new Vector2(Math.random()*3-1.5, Math.random()*3-1.5));
 		}
 		

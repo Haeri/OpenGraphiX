@@ -1,15 +1,9 @@
 package physics;
 
-import java.awt.Color;
-
-import com.sun.prism.Graphics;
-
 import component.Collider;
 import core.Bounds;
 import core.GraphiXObject;
 import core.Vector2;
-import javafx.scene.transform.Transform;
-import render.Gizmo;
 
 public class RectCollider extends Collider {
 

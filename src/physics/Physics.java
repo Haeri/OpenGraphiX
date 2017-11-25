@@ -25,7 +25,7 @@ public class Physics{
 	
 	public Physics(){
 		bodies = new ArrayList<Rigidbody>();
-		collisionMap = new CollisionMap(2000, 2000, 2);
+		collisionMap = new CollisionMap(4000, 4000, 40);
 	}
 	
 	public static void addRigidbody(Rigidbody rb){

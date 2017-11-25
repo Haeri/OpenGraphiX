@@ -34,12 +34,12 @@ public class Core extends Thread{
 	public UI_Text physicsString;
 
 //	public GizmoCircle mouse;
-//	public GO_ParticleSystem mouse;
+	public GO_ParticleSystem mouse;
 //	public GO_Circle mouse;
-	public Camera mouse;
+//	public Camera mouse;
 	
 	public Core(Scene scene){
-		this(scene, 1000, 600);
+		this(scene, 1200, 800);
 	}
 	
 	public Core(Scene scene, int width, int height) {
@@ -70,7 +70,7 @@ public class Core extends Thread{
 		physicsString.transform.position = new Vector2(10, 45);
 
 //		mouse = new GizmoCircle(3, Color.GREEN);
-//		mouse = new GO_ParticleSystem(10);
+		mouse = new GO_ParticleSystem(10);
 //		mouse = new GO_Circle(20, Color.GREEN);
 //		mouse = new Camera();
 		
